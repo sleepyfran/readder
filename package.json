@@ -9,6 +9,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "rxjs": "^6.4.0",
     "vue": "^2.6.6",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
@@ -18,7 +19,6 @@
     "@vue/cli-plugin-eslint": "^3.4.0",
     "@vue/cli-plugin-unit-jest": "^3.4.0",
     "@vue/cli-service": "^3.4.0",
-    "@vue/eslint-config-prettier": "^4.0.1",
     "@vue/test-utils": "^1.0.0-beta.20",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
