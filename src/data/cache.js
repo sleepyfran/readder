@@ -54,10 +54,20 @@ const invalidateExpiredCache = () => {
     }
 }
 
-// Checks every minute if any item from the cache should be removed
+/**
+ * Starts a one minute interval to check what cache items' expiration date is already due and removes those items.
+ */
+let cacheCheckIntervalId = 0
 const startExpiredCacheCheck = () => {
     const oneMinute = 60000
-    setInterval(invalidateExpiredCache, oneMinute)
+    cacheCheckIntervalId = setInterval(invalidateExpiredCache, oneMinute)
 }
 
-export default { set, has, get, remove, startExpiredCacheCheck }
+/**
+ * Stops a previously created interval.
+ */
+const stopExpiredCacheCheck = () => {
+    clearInterval(cacheCheckIntervalId)
+}
+
+export default { set, has, get, remove, startExpiredCacheCheck, stopExpiredCacheCheck }

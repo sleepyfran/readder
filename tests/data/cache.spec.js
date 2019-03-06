@@ -103,6 +103,7 @@ test('remove should remove the element if they key is present', () => {
 
 test('expired cache items should be removed every minute', () => {
     jest.useFakeTimers()
+
     cache.startExpiredCacheCheck()
     const elementToRemove1 = addRandomObject(1000)
     const elementToRemove2 = addRandomObject(1500)
@@ -116,5 +117,22 @@ test('expired cache items should be removed every minute', () => {
     testCacheObject(elementToKeep.key, {
         value: elementToKeep.value,
         expireDate: elementToKeep.expireDate
+    })
+
+    cache.stopExpiredCacheCheck()
+})
+
+test('expired cache check should stop after calling stop', () => {
+    jest.useFakeTimers()
+
+    cache.startExpiredCacheCheck()
+    jest.runOnlyPendingTimers()
+    cache.stopExpiredCacheCheck()
+
+    const testElement = addRandomObject(100)
+
+    testCacheObject(testElement.key, {
+        value: testElement.value,
+        expireDate: testElement.expireDate
     })
 })
