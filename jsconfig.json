@@ -2,7 +2,8 @@
     "typeAcquisition": {
         "include": [
             "jest",
-            "rewire"
+            "rewire",
+            "lodash"
         ]
     }
 }

@@ -61,7 +61,7 @@ export default {
         @include default-flex();
 
         & h3 {
-            color: $secondary-text-color;
+            color: $secondary-color;
             margin-top: 30px;
             margin-left: 10px;
         }

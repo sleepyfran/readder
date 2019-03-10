@@ -5,7 +5,6 @@
 </template>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css?family=Quicksand:500');
 @import '~@view/styles/colors';
 @import '~@view/styles/fonts';
 
@@ -14,7 +13,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: $primary-text-color;
+    color: $primary-color;
 
     h1 {
         font-family: $title-font, $default-fonts;
@@ -24,7 +23,7 @@
 /* Used in text and icons that are interactive. */
 .hoverable {
     &:hover {
-        color: $hovered-text-color;
+        color: $hovered-color;
         cursor: default;
     }
 }
