@@ -24,6 +24,7 @@
 .hoverable {
     &:hover {
         color: $hovered-color;
+        transition: 0.5s;
         cursor: default;
     }
 }

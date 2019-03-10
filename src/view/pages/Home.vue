@@ -1,27 +1,41 @@
 <template>
   <div class="home">
-      <Header title="Readder" />
-      <PreferenceSelection
-        :suggestedCommunities="suggestedCommunities"
-        :minutes.sync="selectedMinutes"
-        :community.sync="selectedCommunity" />
+        <Header title="Readder" />
+        <PreferenceSelection
+            :suggestedCommunities="suggestedCommunities"
+            :minutes.sync="selectedMinutes"
+            :community.sync="selectedCommunity" />
+        <LoadingButton
+            text="Show me!"
+            :isLoading="isLoading"
+            :isDisabled="isDisabled"
+            @buttonClicked="onButtonClicked" />
   </div>
 </template>
 
 <script>
 import Header from '@view/components/Header'
 import PreferenceSelection from '@view/components/PreferenceSelection'
+import LoadingButton from '@view/components/LoadingButton'
 
 export default {
     name: 'home',
     components: {
         Header,
-        PreferenceSelection
+        PreferenceSelection,
+        LoadingButton
     },
     data: function() {
         return {
             selectedMinutes: 0,
-            selectedCommunity: ''
+            selectedCommunity: '',
+            isLoading: false,
+            isDisabled: false
+        }
+    },
+    methods: {
+        onButtonClicked: function() {
+            this.isLoading = !this.isLoading
         }
     },
     computed: {
@@ -41,6 +55,11 @@ export default {
     & .preference-selection {
         align-self: center;
         margin-top: 5%;
+    }
+
+    & .loading-button {
+        align-self: center;
+        margin-top: 2%;
     }
 }
 

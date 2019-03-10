@@ -16,6 +16,7 @@
 import { sample } from 'lodash'
 
 export default {
+    name: 'preferences-selection',
     props: {
         suggestedCommunities: {
             type: Array,
