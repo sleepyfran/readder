@@ -1,29 +1,32 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
     <router-view />
   </div>
 </template>
 
 <style lang="scss">
+@import url('https://fonts.googleapis.com/css?family=Quicksand:500');
+@import '~@view/styles/colors';
+@import '~@view/styles/fonts';
+
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
+    font-family: $default-fonts;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: $primary-text-color;
+
+    h1 {
+        font-family: $title-font, $default-fonts;
     }
-  }
 }
+
+/* Used in text and icons that are interactive. */
+.hoverable {
+    &:hover {
+        color: $hovered-text-color;
+        cursor: default;
+    }
+}
+
 </style>
