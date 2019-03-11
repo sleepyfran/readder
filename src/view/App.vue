@@ -5,8 +5,8 @@
 </template>
 
 <style lang="scss">
-@import '~@view/styles/colors';
-@import '~@view/styles/fonts';
+@import '~@view/styles/_colors';
+@import '~@view/styles/_fonts';
 
 #app {
     font-family: $default-fonts;
