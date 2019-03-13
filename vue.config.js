@@ -8,6 +8,7 @@ module.exports = {
             .set('@data', path.resolve(__dirname, 'src/data'))
             .set('@infrastructure', path.resolve(__dirname, 'src/infrastructure'))
             .set('@view', path.resolve(__dirname, 'src/view'))
-            .set('@vuex', path.resolve(__dirname, 'src/vuex'))
+            .set('@store', path.resolve(__dirname, 'src/store'))
+            .set('@services', path.resolve(__dirname, 'src/services'))
     }
 }
