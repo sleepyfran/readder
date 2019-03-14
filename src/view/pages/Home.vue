@@ -17,6 +17,8 @@
 import Header from '@view/components/Header'
 import PreferenceSelection from '@view/components/PreferenceSelection'
 import LoadingButton from '@view/components/LoadingButton'
+import loadingTypes from '@store/modules/posts/loading-types'
+import { mapActions } from 'vuex'
 
 export default {
     name: 'home',
@@ -29,18 +31,28 @@ export default {
         return {
             selectedMinutes: 0,
             selectedCommunity: '',
-            isLoading: false,
             isDisabled: false
         }
     },
     methods: {
-        onButtonClicked: function() {
-            this.isLoading = !this.isLoading
+        ...mapActions('posts', {
+            loadPosts: 'loadPostsFor'
+        }),
+
+        onButtonClicked: function () {
+            this.loadPosts({
+                minutes: this.selectedMinutes,
+                subreddit: this.selectedCommunity
+            })
         }
     },
     computed: {
         suggestedCommunities: function() {
             return ['nosleep', 'lifeofnorman', 'philosophy', 'history'] // TODO: Move this somewhere else.
+        },
+
+        isLoading: function () {
+            return this.$store.state.posts.loadingStatus === loadingTypes.loading
         }
     }
 }
