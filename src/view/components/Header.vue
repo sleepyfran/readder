@@ -13,6 +13,9 @@
 </template>
 
 <script>
+import { SWITCH_THEME } from '@store/modules/theme/mutation-types'
+import { mapActions } from 'vuex'
+
 export default {
     name: 'app-header',
     props: {
@@ -25,6 +28,10 @@ export default {
         }
     },
     methods: {
+        ...mapActions('theme', [
+            SWITCH_THEME
+        ]),
+
         onTitleClicked: function() {
             this.$emit('titleClicked')
         },
@@ -34,7 +41,7 @@ export default {
         },
 
         onThemeChangeClicked: function() {
-            this.$emit('themeChangeClicked')
+            this.switchTheme()
         },
 
         onFontChangeClicked: function() {
@@ -45,7 +52,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@view/styles/_colors';
+@import '~@view/styles/_theme';
 
 @mixin default-flex {
     display: flex;
@@ -61,9 +68,12 @@ export default {
         @include default-flex();
 
         & h3 {
-            color: $secondary-color;
             margin-top: 30px;
             margin-left: 10px;
+
+            @include applyTheme() {
+                color: themed('secondary');
+            }
         }
     }
 

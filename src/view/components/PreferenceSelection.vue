@@ -50,7 +50,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@view/styles/_colors';
+@import '~@view/styles/_theme';
 
 .preference-selection {
     display: flex;
@@ -70,10 +70,14 @@ export default {
 
         & input {
             border: none;
-            border-bottom: 2px solid $primary-color;
             outline: none;
             font-size: 1em;
-            color: $primary-color;
+
+            @include applyTheme() {
+                background-color: themed('background');
+                border-bottom: 2px solid themed('primary');
+                color: themed('primary');
+            }
         }
 
         &:first-child {

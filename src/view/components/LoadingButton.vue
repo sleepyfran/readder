@@ -37,11 +37,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@view/styles/_colors';
+@import '~@view/styles/_theme';
 
 .loading-button {
-    background-color: $primary-color;
-    color: white;
     font-size: 24px;
     min-width: 200px;
     padding: 10px;
@@ -50,22 +48,36 @@ export default {
     user-select: none;
     border-radius: 5px;
 
-    &.loading {
-        background-color: $hovered-color;
+    @include applyTheme() {
+        background-color: themed('primary');
+        color: themed('textOnBackground');
     }
 
-    &.disabled {
-        background-color: $disabled-color;
-        cursor: not-allowed;
-
-        &:hover {
-            background-color: $disabled-color;
+    &.loading {
+        @include applyTheme() {
+            background-color: themed('disabled');
         }
     }
 
-    &:hover {
-        background-color: $hovered-color;
+    &.disabled {
+        cursor: not-allowed;
+
+        @include applyTheme() {
+            background-color: themed('disabled');
+
+            &:hover {
+                background-color: themed('disabled');
+            }
+        }
     }
+
+
+
+    @include applyTheme() {
+            &:hover {
+                background-color: themed('hovered');
+            }
+        }
 
     & .spin {
         animation: loading 1s ease-in-out infinite both;

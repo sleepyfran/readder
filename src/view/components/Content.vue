@@ -24,11 +24,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@view/styles/_theme';
 
 .content {
     font-size: 1.2em;
     text-align: left;
     padding: 0 20%;
+
+    @include applyTheme() {
+        background-color: themed('background');
+    }
 }
 
 </style>
