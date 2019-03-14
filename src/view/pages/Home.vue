@@ -43,6 +43,8 @@ export default {
             this.loadPosts({
                 minutes: this.selectedMinutes,
                 subreddit: this.selectedCommunity
+            }).then(() => {
+                this.$router.push('/reader')
             })
         }
     },

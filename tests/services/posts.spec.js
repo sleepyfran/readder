@@ -25,7 +25,9 @@ const createPost = () => {
         title: 'Test Title',
         content: 'Test Content',
         htmlContent: 'Test Content HTML',
-        url: 'Test URL'
+        url: 'Test URL',
+        subreddit: 'Test subreddit',
+        subredditUrl: 'Test subreddit URL'
     }
 }
 

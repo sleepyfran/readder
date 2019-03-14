@@ -24,7 +24,9 @@ export const postsFromJson = (json) => {
                 title: post['title'],
                 content: post['selftext'],
                 htmlContent: post['selftext_html'],
-                url: post['url']
+                url: post['url'],
+                subreddit: post['subreddit'],
+                subredditUrl: `https://reddit.com/r/${post['subreddit']}`
             }
         })
 }

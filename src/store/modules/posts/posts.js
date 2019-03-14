@@ -32,7 +32,7 @@ const actions = {
     async loadPostsFor ({ commit }, filter) {
         commit(LOADING_POSTS)
 
-        await posts.load(
+        return posts.load(
             filter,
             (posts) => { commit(POSTS_LOADED, posts) },
             (error) => { commit(ERROR) },

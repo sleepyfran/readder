@@ -52,7 +52,9 @@ describe('postsFromJson', () => {
                             title: 'A test post title',
                             selftext: 'A test post content',
                             selftext_html: 'A test post content HTML',
-                            url: 'A test post URL'
+                            url: 'A test post URL',
+                            subreddit: 'A test subreddit',
+                            subredditUrl: 'A test subreddit URL'
                         }
                     },
                     {
@@ -60,7 +62,9 @@ describe('postsFromJson', () => {
                             title: 'Another test post title',
                             selftext: 'Another test post content',
                             selftext_html: 'Another test post content',
-                            url: 'Another test post URL'
+                            url: 'Another test post URL',
+                            subreddit: 'Another test subreddit',
+                            subredditUrl: 'Another test subreddit URL'
                         }
                     }
                 ]
