@@ -3,13 +3,18 @@
         <div class="app-container">
             <router-view />
         </div>
+        <Footer />
     </div>
 </template>
 
 <script>
+import Footer from '@view/components/Footer'
 import themeTypes from '@store/modules/theme/theme-types'
 
 export default {
+    components: {
+        Footer
+    },
     computed: {
         activeTheme: function () {
             return this.$store.state.theme.activeTheme === themeTypes.light
@@ -34,7 +39,9 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 
     h1 {
         font-family: $title-font, $default-fonts;
@@ -42,8 +49,15 @@ body {
 }
 
 .app-container {
-    height: 100vh;
+    flex: 1;
 
+    @include applyTheme() {
+        color: themed('primary');
+        background-color: themed('background');
+    }
+}
+
+.footer {
     @include applyTheme() {
         color: themed('primary');
         background-color: themed('background');
