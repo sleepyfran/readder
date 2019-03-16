@@ -1,7 +1,7 @@
 <template>
     <div class="footer">
         <p class="item">made with <span class="heart">&lt;3</span> by <a href="https://github.com/sleepyfran" target="_blank">Fran González</a></p>
-        <a class="item" href="https://github.com/sleepyfran/readder-web" target="_blank">source code</a>
+        <a class="item" href="https://github.com/sleepyfran/readder" target="_blank">source code</a>
     </div>
 </template>
 
