@@ -34,6 +34,14 @@ export default {
     @include applyTheme() {
         background-color: themed('background');
     }
+
+    @media (max-width: 1300px) {
+        padding: 0 10%;
+    }
+
+    @media (max-width: 800px) {
+        padding: 0 5%;
+    }
 }
 
 </style>

@@ -54,11 +54,16 @@ export default {
 <style lang="scss" scoped>
 @import '~@view/styles/_theme';
 
+$breaking-width-size: 1200px;
 @mixin default-flex {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+
+    @media (max-width: $breaking-width-size) {
+        flex-direction: column;
+    }
 }
 
 .header {
@@ -73,6 +78,10 @@ export default {
 
             @include applyTheme() {
                 color: themed('secondary');
+            }
+
+            @media (max-width: $breaking-width-size) {
+                margin: 10px;
             }
         }
     }

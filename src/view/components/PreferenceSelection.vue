@@ -1,11 +1,11 @@
 <template>
     <div class="preference-selection">
-        <div>
+        <div class="preference-item">
             <p>I have</p>
             <input type="number" v-model.number="minutes" />
             <p>{{ minutesText }}</p>
         </div>
-        <div>
+        <div class="preference-item">
             <p>to read from r/</p>
             <input type="text" v-model="community" />
         </div>
@@ -52,11 +52,12 @@ export default {
 <style lang="scss" scoped>
 @import '~@view/styles/_theme';
 
+$min-column-size: 900px;
 .preference-selection {
     display: flex;
     flex-direction: column;
 
-    & div {
+    .preference-item {
         display: flex;
         font-size: 3em;
 
@@ -83,6 +84,18 @@ export default {
         &:first-child {
             margin-bottom: 10px;
         }
+
+        @media (max-width: $min-column-size) {
+            flex-direction: column;
+        }
+
+        @media (max-width: 500px) {
+            font-size: 2em;
+        }
+    }
+
+    @media (max-width: $min-column-size) {
+        margin: 20px;
     }
 }
 
