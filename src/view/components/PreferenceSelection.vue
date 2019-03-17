@@ -2,7 +2,7 @@
     <div class="preference-selection">
         <div class="preference-item">
             <p>I have</p>
-            <input type="number" v-model.number="minutes" />
+            <input class="minutes-input" type="number" v-model.number="minutes" />
             <p>{{ minutesText }}</p>
         </div>
         <div class="preference-item">
@@ -60,6 +60,7 @@ $min-column-size: 900px;
     .preference-item {
         display: flex;
         font-size: 3em;
+        align-self: center;
 
         & * {
             margin: 0 10px;
@@ -73,11 +74,26 @@ $min-column-size: 900px;
             border: none;
             outline: none;
             font-size: 1em;
+            text-align: center;
 
             @include applyTheme() {
                 background-color: themed('background');
                 border-bottom: 2px solid themed('primary');
                 color: themed('primary');
+            }
+
+            &.minutes-input {
+                max-width: 100px;
+
+                @media (max-width: $min-column-size) {
+                    max-width: 50px;
+                }
+
+                /* Disables the increase/decrease buttons. */
+                &::-webkit-inner-spin-button,
+                &::-webkit-outer-spin-button {
+                    appearance: none;
+                }
             }
         }
 
@@ -86,7 +102,9 @@ $min-column-size: 900px;
         }
 
         @media (max-width: $min-column-size) {
-            flex-direction: column;
+            &:nth-child(2) {
+                flex-direction: column;
+            }
         }
 
         @media (max-width: 500px) {
