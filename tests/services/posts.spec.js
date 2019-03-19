@@ -20,10 +20,10 @@ let onSuccess
 let onError
 let onNoResults
 
-const createPost = () => {
+const createPost = (content = 'Test Content') => {
     return {
         title: 'Test Title',
-        content: 'Test Content',
+        content: content,
         htmlContent: 'Test Content HTML',
         url: 'Test URL',
         subreddit: 'Test subreddit',
@@ -118,5 +118,25 @@ describe('posts', () => {
             expect(onError).not.toHaveBeenCalled()
             expect(onNoResults).not.toHaveBeenCalled()
         })
+    })
+
+    test('should call onNoResults when content is empty or null', () => {
+        const samplePosts = [...Array(5)].map(e => createPost('')).concat([...Array(5)].map(e => createPost(null)))
+        subredditPosts.mockResolvedValueOnce(samplePosts)
+
+        return posts.load(
+            {
+                minutes: 5,
+                subreddit: 'test',
+            },
+            onSuccess,
+            onError,
+            onNoResults
+        ).then(_ => {
+            expect(onNoResults).toHaveBeenCalled()
+            expect(onSuccess).not.toHaveBeenCalled
+            expect(onError).not.toHaveBeenCalled()
+        })
+
     })
 })

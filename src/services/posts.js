@@ -14,7 +14,7 @@ import { shuffle } from 'lodash'
 const load = (filter, onSuccess, onError, onNoResults) => {
     return subredditPosts(filter.subreddit, sortByFilters.hot, postsFromJson)
         .then(posts => {
-            const possiblePosts = posts.filter(p => minutesToRead(p.content) <= filter.minutes && p.content !== '')
+            const possiblePosts = posts.filter(p => minutesToRead(p.content) <= filter.minutes && p.content !== '' && p.content !== null)
             if (possiblePosts.length === 0) return onNoResults()
 
             const randomizedPosts = shuffle(possiblePosts)
