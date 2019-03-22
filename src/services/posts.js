@@ -1,7 +1,7 @@
 import { sortByFilters, subredditPosts } from '@infrastructure/reddit-api'
 import { postsFromJson } from '@infrastructure/reddit-adapters'
 import { minutesToRead } from '@services/reading-time'
-import { shuffle } from 'lodash'
+import { shuffle, isEmpty } from 'lodash'
 
 /**
  * Queries the specified subreddit for posts and filters by the number of minutes that the user can read.
@@ -14,7 +14,7 @@ import { shuffle } from 'lodash'
 const load = (filter, onSuccess, onError, onNoResults) => {
     return subredditPosts(filter.subreddit, sortByFilters.hot, postsFromJson)
         .then(posts => {
-            const possiblePosts = posts.filter(p => minutesToRead(p.content) <= filter.minutes && p.content !== '' && p.content !== null)
+            const possiblePosts = posts.filter(p => !isEmpty(p.content) && minutesToRead(p.content) <= filter.minutes)
             if (possiblePosts.length === 0) return onNoResults()
 
             const randomizedPosts = shuffle(possiblePosts)
