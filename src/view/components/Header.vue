@@ -75,10 +75,7 @@ $breaking-width-size: 1200px;
         & h3 {
             margin-top: 30px;
             margin-left: 10px;
-
-            @include applyTheme() {
-                color: themed('secondary');
-            }
+            color: var(--secondary);
 
             @media (max-width: $breaking-width-size) {
                 margin: 10px;

@@ -18,8 +18,16 @@ export default {
     computed: {
         activeTheme: function () {
             return this.$store.state.theme.activeTheme === themeTypes.light
-                ? 'theme-light'
-                : 'theme-dark'
+                ? 'light'
+                : 'dark'
+        }
+    },
+    watch: {
+        activeTheme: function(val, oldVal) {
+            // Dirty workaround to add the class to the body so that when we scroll past the viewport size
+            // we don't get just a white background.
+            document.body.classList.remove(oldVal)
+            document.body.classList.add(val)
         }
     }
 }
@@ -29,12 +37,16 @@ export default {
 <style lang="scss">
 @import '~@view/styles/_theme';
 @import '~@view/styles/_fonts';
+@import '~@view/styles/_animations';
 
 body {
     margin: 0;
+    background-color: var(--background);
 }
 
 #app {
+    color: var(--primary);
+    background-color: var(--background);
     font-family: $default-fonts;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -42,6 +54,11 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    transition: $default-transition;
+
+    input {
+        transition: $default-transition;
+    }
 
     h1 {
         font-family: $title-font, $default-fonts;
@@ -50,29 +67,13 @@ body {
 
 .app-container {
     flex: 1;
-
-    @include applyTheme() {
-        color: themed('primary');
-        background-color: themed('background');
-    }
-}
-
-.footer {
-    @include applyTheme() {
-        color: themed('primary');
-        background-color: themed('background');
-    }
 }
 
 /* Used in text and icons that are interactive. */
 .hoverable {
     &:hover {
-        transition: 0.5s;
         cursor: default;
-
-        @include applyTheme() {
-            color: themed('hovered');
-        }
+        color: var(--hovered);
     }
 }
 

@@ -75,12 +75,9 @@ $min-column-size: 900px;
             outline: none;
             font-size: 1em;
             text-align: center;
-
-            @include applyTheme() {
-                background-color: themed('background');
-                border-bottom: 2px solid themed('primary');
-                color: themed('primary');
-            }
+            background-color: var(--background);
+            border-bottom: 2px solid var(--primary);
+            color: var(--primary);
 
             &.minutes-input {
                 max-width: 100px;

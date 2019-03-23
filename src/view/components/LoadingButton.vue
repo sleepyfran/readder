@@ -38,46 +38,35 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@view/styles/_theme';
+@import '~@view/styles/_animations';
 
 .loading-button {
     font-size: 24px;
     min-width: 200px;
     padding: 10px;
-    transition: 0.5s;
     cursor: pointer;
     user-select: none;
     border-radius: 5px;
-
-    @include applyTheme() {
-        background-color: themed('primary');
-        color: themed('textOnBackground');
-    }
+    background-color: var(--primary);
+    color: var(--textOnBackground);
+    transition: $default-transition;
 
     &.loading {
-        @include applyTheme() {
-            background-color: themed('disabled');
-        }
+        background-color: var(--disabled);
     }
 
     &.disabled {
         cursor: not-allowed;
+        background-color: var(--disabled);
 
-        @include applyTheme() {
-            background-color: themed('disabled');
-
-            &:hover {
-                background-color: themed('disabled');
-            }
+        &:hover {
+            background-color: var(disabled);
         }
     }
 
-
-
-    @include applyTheme() {
-            &:hover {
-                background-color: themed('hovered');
-            }
-        }
+    &:hover {
+        background-color: var(--hovered);
+    }
 
     & .spin {
         animation: loading 1s ease-in-out infinite both;

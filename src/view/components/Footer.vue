@@ -22,24 +22,19 @@ export default {
 
     & a {
         text-decoration: none;
+        color: var(--anchors);
 
-        @include applyTheme() {
-            color: themed('anchors');
-
-            &:active {
-                color: themed('anchors');
-            }
+        &:active {
+            color: var(--anchors);
         }
     }
 
     .heart {
-        @include applyTheme() {
-            color: themed('heart');
-        }
+        color: var(--heart);
     }
 
     .item:not(:first-child) {
-        border-left: solid 1px themed('primary');
+        border-left: solid 1px var(--primary);
         margin-left: 10px;
         padding-left: 10px;
     }

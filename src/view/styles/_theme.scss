@@ -1,41 +1,29 @@
-$themes: (
-    light: (
-        background: #f0f0f0,
-        primary: #2c3e50,
-        secondary: #2c3e508e,
-        hovered: #73a4d5,
-        disabled: #858585,
-        textOnBackground: white,
-        heart: #c92e2e,
-        anchors: #4179b1
-    ),
-    dark: (
-        background: #3e3e3e,
-        primary: #7694b1,
-        secondary: #7b9dc18e,
-        hovered: #466685,
-        disabled: #575757,
-        textOnBackground: white,
-        heart: #c92e2e,
-        anchors: #4179b1
-    )
-);
-
-/* Base on https://medium.com/@dmitriy.borodiy/easy-color-theming-with-scss-bc38fd5734d1 */
-$theme-map: ();
-@mixin applyTheme() {
-    @each $theme, $map in $themes {
-        .theme-#{$theme} & {
-            @each $key, $value in $map {
-                $value: map-get(map-get($themes, $theme), '#{$key}');
-                $theme-map: map-merge($theme-map, ($key: $value)) !global;
-            }
-
-            @content;
-        }
-    }
+@mixin default-colors() {
+    --background: #f0f0f0;
+    --primary: #2c3e50;
+    --secondary: #2c3e508e;
+    --hovered: #73a4d5;
+    --disabled: #858585;
+    --textOnBackground: white;
+    --heart: #c92e2e;
+    --anchors: #4179b1;
 }
 
-@function themed($key) {
-    @return map-get($theme-map, $key);
+:root {
+    @include default-colors();
+}
+
+.light {
+    @include default-colors();
+}
+
+.dark {
+    --background: #3e3e3e;
+    --primary: #7694b1;
+    --secondary: #7b9dc18e;
+    --hovered: #466685;
+    --disabled: #575757;
+    --textOnBackground: white;
+    --heart: #c92e2e;
+    --anchors: #4179b1;
 }

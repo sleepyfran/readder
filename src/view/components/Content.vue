@@ -31,10 +31,6 @@ export default {
     text-align: left;
     padding: 0 20%;
 
-    @include applyTheme() {
-        background-color: themed('background');
-    }
-
     @media (max-width: 1300px) {
         padding: 0 10%;
     }
