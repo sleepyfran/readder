@@ -1,6 +1,6 @@
-import posts from '@services/posts'
 import loadingTypes from './loading-types'
 import { LOADING_POSTS, POSTS_LOADED, NO_RESULTS, ERROR } from './mutation-types'
+import ServiceConnector from '@services/service-connector.js'
 
 const state = {
     loadingStatus: null,
@@ -32,7 +32,7 @@ const actions = {
     async loadPostsFor ({ commit }, filter) {
         commit(LOADING_POSTS)
 
-        return posts.load(
+        return ServiceConnector.loadFrom(
             filter,
             (posts) => { commit(POSTS_LOADED, posts) },
             (error) => { commit(ERROR) },

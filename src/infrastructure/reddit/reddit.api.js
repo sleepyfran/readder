@@ -1,3 +1,5 @@
+import { transform } from './reddit.adapter'
+
 const baseUrl = 'https://www.reddit.com'
 
 /**
@@ -21,17 +23,14 @@ export const sortByFilters = {
  *
  * @param {string} name subreddit name to fetch the posts from.
  * @param {string} sortBy type of sorting applied to the posts.
- * @param {(json: string) => []} adapter function to apply on the raw JSON data.
  * @param {number} limit max number of posts to retrieve.
  */
-export const subredditPosts = (name, sortBy, adapter, limit = 20) => {
+export const subredditPosts = (name, sortBy, limit = 20) => {
     const url = generateUrl.forSubreddit(name, sortBy, limit)
 
     return fetch(url)
         .then(response => response.json())
-        .then(json => {
-            return adapter(json)
-        })
+        .then(json => transform(json))
 }
 
 export const subredditAutocompletion = (query) => {

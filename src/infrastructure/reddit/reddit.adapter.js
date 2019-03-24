@@ -1,4 +1,5 @@
 import { isEmpty } from 'lodash'
+import Post from '@common/post.model'
 
 const MALFORMED_ERROR = 'The provided JSON is not a valid object'
 
@@ -7,7 +8,7 @@ const MALFORMED_ERROR = 'The provided JSON is not a valid object'
  *
  * @param {string} json data to transform.
  */
-export const postsFromJson = (json) => {
+export const transform = (json) => {
     if (!json) throw MALFORMED_ERROR
     if (!json.data) throw MALFORMED_ERROR
     if (!json.data.children) throw MALFORMED_ERROR
@@ -20,15 +21,15 @@ export const postsFromJson = (json) => {
             const post = postInfo.data
             if (!post) throw MALFORMED_ERROR
 
-            return {
-                title: post['title'],
-                content: post['selftext'],
-                htmlContent: post['selftext_html'],
-                url: post['url'],
-                subreddit: post['subreddit'],
-                subredditUrl: `https://reddit.com/r/${post['subreddit']}`
-            }
+            return Post.create(
+                post['title'],
+                `r/${post['subreddit']}`,
+                post['selftext'],
+                post['selftext_html'],
+                post['url'],
+                `https://reddit.com/r/${post['subreddit']}`,
+            )
         })
 }
 
-export default { postsFromJson }
+export default { transform }

@@ -48,13 +48,13 @@ export default {
 
         postSubreddit: function () {
             return this.currentPost
-                ? `r/${this.currentPost.subreddit}`
-                : 'r/'
+                ? this.currentPost.community
+                : ''
         },
 
         postContent: function () {
             return this.currentPost
-                ? this.currentPost.htmlContent
+                ? this.currentPost.html
                 : ''
         }
     },

@@ -4,7 +4,7 @@
         <PreferenceSelection
             :suggestedCommunities="suggestedCommunities"
             :minutes.sync="selectedMinutes"
-            :community.sync="selectedCommunity" />
+            :community.sync="selectedSubcommunity" />
         <LoadingButton
             text="Show me!"
             :isLoading="isLoading"
@@ -30,7 +30,8 @@ export default {
     data: function() {
         return {
             selectedMinutes: 0,
-            selectedCommunity: '',
+            selectedCommunity: 'reddit',
+            selectedSubcommunity: '',
             isDisabled: false
         }
     },
@@ -42,7 +43,8 @@ export default {
         onButtonClicked: function () {
             this.loadPosts({
                 minutes: this.selectedMinutes,
-                subreddit: this.selectedCommunity
+                community: this.selectedCommunity,
+                subcommunity: this.selectedSubcommunity
             }).then(() => {
                 this.$router.push('/reader')
             })

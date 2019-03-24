@@ -1,9 +1,10 @@
-import adapters from '@infrastructure/reddit-adapters'
+import { transform } from '@infrastructure/reddit/reddit.adapter'
+import Post from '@common/post.model'
 
-describe('postsFromJson', () => {
+describe('transform', () => {
     test('should throw an error if an empty string is given', () => {
         const emptyString = ''
-        expect(() => adapters.postsFromJson(emptyString))
+        expect(() => transform(emptyString))
             .toThrow('The provided JSON is not a valid object')
     })
 
@@ -12,7 +13,7 @@ describe('postsFromJson', () => {
             data: {}
         }
 
-        expect(() => adapters.postsFromJson(emptyDataJson))
+        expect(() => transform(emptyDataJson))
             .toThrow('The provided JSON is not a valid object')
     })
 
@@ -27,7 +28,7 @@ describe('postsFromJson', () => {
             }
         }
 
-        expect(() => adapters.postsFromJson(malformedChildrenJson))
+        expect(() => transform(malformedChildrenJson))
             .toThrow('The provided JSON is not a valid object')
     })
 
@@ -38,7 +39,7 @@ describe('postsFromJson', () => {
             }
         }
 
-        const posts = adapters.postsFromJson(emptyChildrenJson)
+        const posts = transform(emptyChildrenJson)
         expect(posts).toBeTruthy()
         expect(posts).toHaveLength(0)
     })
@@ -48,30 +49,30 @@ describe('postsFromJson', () => {
             data: {
                 children: [
                     {
-                        data: {
-                            title: 'A test post title',
-                            selftext: 'A test post content',
-                            selftext_html: 'A test post content HTML',
-                            url: 'A test post URL',
-                            subreddit: 'A test subreddit',
-                            subredditUrl: 'A test subreddit URL'
-                        }
+                        data: Post.create(
+                            'A test post title',
+                            'A test community name',
+                            'A test post content',
+                            'A test post content HTML',
+                            'A test post URL',
+                            'A test community URL'
+                        )
                     },
                     {
-                        data: {
-                            title: 'Another test post title',
-                            selftext: 'Another test post content',
-                            selftext_html: 'Another test post content',
-                            url: 'Another test post URL',
-                            subreddit: 'Another test subreddit',
-                            subredditUrl: 'Another test subreddit URL'
-                        }
+                        data: Post.create(
+                            'Another test post title',
+                            'Another test community name',
+                            'Another test post content',
+                            'Another test post content HTML',
+                            'Another test post URL',
+                            'Another test community URL'
+                        )
                     }
                 ]
             }
         }
 
-        const posts = adapters.postsFromJson(validJson)
+        const posts = transform(validJson)
         expect(posts).toBeTruthy()
         expect(posts).toHaveLength(2)
 
