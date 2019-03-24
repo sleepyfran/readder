@@ -1,11 +1,12 @@
 import { transform } from '@infrastructure/reddit/reddit.adapter'
 import Post from '@common/post.model'
+import MalformedData from '@common/malformed-data.error'
 
 describe('transform', () => {
     test('should throw an error if an empty string is given', () => {
         const emptyString = ''
         expect(() => transform(emptyString))
-            .toThrow('The provided JSON is not a valid object')
+            .toThrow(MalformedData)
     })
 
     test('should throw an error if no data object is given', () => {
@@ -14,7 +15,7 @@ describe('transform', () => {
         }
 
         expect(() => transform(emptyDataJson))
-            .toThrow('The provided JSON is not a valid object')
+            .toThrow(MalformedData)
     })
 
     test('should throw an error if children array objects are malformed', () => {
@@ -29,7 +30,7 @@ describe('transform', () => {
         }
 
         expect(() => transform(malformedChildrenJson))
-            .toThrow('The provided JSON is not a valid object')
+            .toThrow(MalformedData)
     })
 
     test('should return an empty array if children array is empty', () => {
