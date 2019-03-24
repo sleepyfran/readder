@@ -3,6 +3,20 @@ import { load } from './posts'
 import UnrecognizedService from '@common/unrecognized-service.error'
 
 /**
+ * Retrieves the connector function for the specified community.
+ *
+ * @param {string} community Name of the community.
+ */
+const getConnectorForCommunity = (filter) => {
+    switch (filter.community) {
+    case 'reddit':
+        return redditConnector
+    default:
+        return () => Promise.reject(new UnrecognizedService)
+    }
+}
+
+/**
  * Abstracts the use of the different communities of the application. Tries to fetch the posts from the given
  * community with the given filters.
  *
@@ -13,18 +27,15 @@ import UnrecognizedService from '@common/unrecognized-service.error'
  * @param {() => void} onNoResults Callback for when the result set is empty.
  */
 export const loadFrom = (filter, onSuccess, onError, onNoResults) => {
-    switch (filter.community) {
-    case 'reddit':
-        return load(
-            () => redditConnector(filter),
-            filter.minutes,
-            onSuccess,
-            onError,
-            onNoResults,
-        )
-    default:
-        return Promise.reject(new UnrecognizedService)
-    }
+    const connector = getConnectorForCommunity(filter)
+
+    return load(
+        () => connector(filter),
+        filter.minutes,
+        onSuccess,
+        onError,
+        onNoResults,
+    )
 }
 
 export default { loadFrom }

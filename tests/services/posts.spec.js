@@ -1,4 +1,4 @@
-import { minutesToRead } from '../../src/services/reading-time'
+import { minutesToRead } from '@services/reading-time'
 import posts from '@services/posts'
 import Post from '@common/post.model'
 
