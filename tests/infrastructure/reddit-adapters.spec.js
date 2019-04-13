@@ -5,17 +5,15 @@ import MalformedData from '@common/malformed-data.error'
 describe('transform', () => {
     test('should throw an error if an empty string is given', () => {
         const emptyString = ''
-        expect(() => transform(emptyString))
-            .toThrow(MalformedData)
+        expect(() => transform(emptyString)).toThrow(MalformedData)
     })
 
     test('should throw an error if no data object is given', () => {
         const emptyDataJson = {
-            data: {}
+            data: {},
         }
 
-        expect(() => transform(emptyDataJson))
-            .toThrow(MalformedData)
+        expect(() => transform(emptyDataJson)).toThrow(MalformedData)
     })
 
     test('should throw an error if children array objects are malformed', () => {
@@ -23,21 +21,20 @@ describe('transform', () => {
             data: {
                 children: [
                     {
-                        malformed: '' // No data property.
-                    }
-                ]
-            }
+                        malformed: '', // No data property.
+                    },
+                ],
+            },
         }
 
-        expect(() => transform(malformedChildrenJson))
-            .toThrow(MalformedData)
+        expect(() => transform(malformedChildrenJson)).toThrow(MalformedData)
     })
 
     test('should return an empty array if children array is empty', () => {
         const emptyChildrenJson = {
             data: {
-                children: []
-            }
+                children: [],
+            },
         }
 
         const posts = transform(emptyChildrenJson)
@@ -56,8 +53,8 @@ describe('transform', () => {
                             'A test post content',
                             'A test post content HTML',
                             'A test post URL',
-                            'A test community URL'
-                        )
+                            'A test community URL',
+                        ),
                     },
                     {
                         data: Post.create(
@@ -66,11 +63,11 @@ describe('transform', () => {
                             'Another test post content',
                             'Another test post content HTML',
                             'Another test post URL',
-                            'Another test community URL'
-                        )
-                    }
-                ]
-            }
+                            'Another test community URL',
+                        ),
+                    },
+                ],
+            },
         }
 
         const posts = transform(validJson)

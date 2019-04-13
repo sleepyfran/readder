@@ -1,7 +1,5 @@
 <template>
-    <div class="content" v-html="unescapedContent">
-
-    </div>
+    <div class="content" v-html="unescapedContent"></div>
 </template>
 
 <script>
@@ -12,14 +10,14 @@ export default {
     props: {
         content: {
             type: String,
-            required: true
-        }
+            required: true,
+        },
     },
     computed: {
-        unescapedContent: function () {
+        unescapedContent: function() {
             return unescape(this.content)
-        }
-    }
+        },
+    },
 }
 </script>
 
@@ -39,5 +37,4 @@ export default {
         padding: 0 5%;
     }
 }
-
 </style>

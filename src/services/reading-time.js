@@ -5,11 +5,8 @@ const averageWordsPerMinute = 200
  *
  * @param {*} postContent to count words from.
  */
-export const countWords = (postContent) => {
-    return postContent
-        .split(/\W/g)
-        .filter(c => c)
-        .length
+export const countWords = postContent => {
+    return postContent.split(/\W/g).filter(c => c).length
 }
 
 /**
@@ -17,7 +14,7 @@ export const countWords = (postContent) => {
  *
  * @param {*} postContent input to calculate.
  */
-export const minutesToRead = (postContent) => {
+export const minutesToRead = postContent => {
     return countWords(postContent) / averageWordsPerMinute
 }
 

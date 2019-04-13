@@ -7,7 +7,7 @@ const baseUrl = 'https://www.reddit.com'
  */
 const generateUrl = {
     forSubreddit: (name, sortBy, limit) => `${baseUrl}/r/${name}/${sortBy}/.json?limit=${limit}`,
-    forAutocomplete: (query) => `${baseUrl}/api/subreddit_autocomplete_v2/.json?query=${query}`
+    forAutocomplete: query => `${baseUrl}/api/subreddit_autocomplete_v2/.json?query=${query}`,
 }
 
 export const sortByFilters = {
@@ -15,7 +15,7 @@ export const sortByFilters = {
     new: 'new',
     controversial: 'controversial',
     top: 'top',
-    rising: 'rising'
+    rising: 'rising',
 }
 
 /**
@@ -33,8 +33,4 @@ export const subredditPosts = (name, sortBy, limit = 20) => {
         .then(json => transform(json))
 }
 
-export const subredditAutocompletion = (query) => {
-    return fetch(endpoint.autocomplete(query))
-}
-
-export default { sortByFilters, subredditPosts, subredditAutocompletion }
+export default { sortByFilters, subredditPosts }

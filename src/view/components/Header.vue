@@ -21,16 +21,14 @@ export default {
     props: {
         title: {
             type: String,
-            required: true
+            required: true,
         },
         subtitle: {
-            type: String
-        }
+            type: String,
+        },
     },
     methods: {
-        ...mapActions('theme', [
-            SWITCH_THEME
-        ]),
+        ...mapActions('theme', [SWITCH_THEME]),
 
         onTitleClicked: function() {
             this.$emit('titleClicked')
@@ -46,8 +44,8 @@ export default {
 
         onFontChangeClicked: function() {
             this.$emit('fontChangeClicked')
-        }
-    }
+        },
+    },
 }
 </script>
 
@@ -90,5 +88,4 @@ $breaking-width-size: 1200px;
         }
     }
 }
-
 </style>

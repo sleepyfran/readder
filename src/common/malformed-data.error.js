@@ -1,1 +1,1 @@
-export default class MalformedData extends Error { }
+export default class MalformedData extends Error {}

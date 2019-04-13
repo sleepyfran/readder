@@ -1,1 +1,1 @@
-export default class UnrecognizedService extends Error { }
+export default class UnrecognizedService extends Error {}

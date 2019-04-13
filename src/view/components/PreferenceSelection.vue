@@ -20,13 +20,13 @@ export default {
     props: {
         suggestedCommunities: {
             type: Array,
-            required: true
+            required: true,
         },
     },
     data: function() {
         return {
             minutes: 5,
-            community: ''
+            community: '',
         }
     },
     watch: {
@@ -35,17 +35,17 @@ export default {
         },
         community: function(value) {
             this.$emit('update:community', value)
-        }
+        },
     },
     computed: {
         minutesText: function() {
             return this.minutes == 1 ? 'minute' : 'minutes'
-        }
+        },
     },
     created: function() {
         this.$emit('update:minutes', this.minutes)
         this.community = sample(this.suggestedCommunities)
-    }
+    },
 }
 </script>
 
@@ -113,5 +113,4 @@ $min-column-size: 900px;
         margin: 20px;
     }
 }
-
 </style>

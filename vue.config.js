@@ -11,5 +11,5 @@ module.exports = {
             .set('@view', path.resolve(__dirname, 'src/view'))
             .set('@store', path.resolve(__dirname, 'src/store'))
             .set('@services', path.resolve(__dirname, 'src/services'))
-    }
+    },
 }

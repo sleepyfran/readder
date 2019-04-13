@@ -5,7 +5,7 @@ import UnrecognizedService from '@common/unrecognized-service.error'
 jest.mock('@infrastructure/reddit/reddit.connector', () => {
     return {
         ...jest.requireActual('@infrastructure/reddit/reddit.connector'),
-        redditConnector: jest.fn()
+        redditConnector: jest.fn(),
     }
 })
 
@@ -20,11 +20,11 @@ describe('ServiceConnector', () => {
         ServiceConnector.loadFrom(
             {
                 community: 'reddit',
-                minutes: 5
+                minutes: 5,
             },
-            () => { },
-            () => { },
-            () => { }
+            () => {},
+            () => {},
+            () => {},
         ).then(() => {
             expect(redditConnector).toHaveBeenCalled()
         })
@@ -36,14 +36,14 @@ describe('ServiceConnector', () => {
         ServiceConnector.loadFrom(
             {
                 community: 'unknown',
-                minutes: 5
+                minutes: 5,
             },
-            () => { },
+            () => {},
             onError,
-            () => { }
+            () => {},
         ).then(() => {
             expect(redditConnector).not.toHaveBeenCalled()
-            expect(onError).toHaveBeenCalledWith(new UnrecognizedService)
+            expect(onError).toHaveBeenCalledWith(new UnrecognizedService())
         })
     })
 })

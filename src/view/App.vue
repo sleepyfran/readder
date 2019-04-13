@@ -13,14 +13,12 @@ import themeTypes from '@store/modules/theme/theme-types'
 
 export default {
     components: {
-        Footer
+        Footer,
     },
     computed: {
-        activeTheme: function () {
-            return this.$store.state.theme.activeTheme === themeTypes.light
-                ? 'light'
-                : 'dark'
-        }
+        activeTheme: function() {
+            return this.$store.state.theme.activeTheme === themeTypes.light ? 'light' : 'dark'
+        },
     },
     watch: {
         activeTheme: function(val, oldVal) {
@@ -28,11 +26,10 @@ export default {
             // we don't get just a white background.
             document.body.classList.remove(oldVal)
             document.body.classList.add(val)
-        }
-    }
+        },
+    },
 }
 </script>
-
 
 <style lang="scss">
 @import '~@view/styles/_theme';
@@ -76,5 +73,4 @@ body {
         color: var(--hovered);
     }
 }
-
 </style>

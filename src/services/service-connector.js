@@ -7,12 +7,12 @@ import UnrecognizedService from '@common/unrecognized-service.error'
  *
  * @param {string} community Name of the community.
  */
-const getConnectorForCommunity = (filter) => {
+const getConnectorForCommunity = filter => {
     switch (filter.community) {
-    case 'reddit':
-        return redditConnector
-    default:
-        return () => Promise.reject(new UnrecognizedService)
+        case 'reddit':
+            return redditConnector
+        default:
+            return () => Promise.reject(new UnrecognizedService())
     }
 }
 
@@ -29,13 +29,7 @@ const getConnectorForCommunity = (filter) => {
 export const loadFrom = (filter, onSuccess, onError, onNoResults) => {
     const connector = getConnectorForCommunity(filter)
 
-    return load(
-        () => connector(filter),
-        filter.minutes,
-        onSuccess,
-        onError,
-        onNoResults,
-    )
+    return load(() => connector(filter), filter.minutes, onSuccess, onError, onNoResults)
 }
 
 export default { loadFrom }

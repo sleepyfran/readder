@@ -5,7 +5,7 @@ import Post from '@common/post.model'
 jest.mock('@services/reading-time', () => {
     return {
         ...jest.requireActual('@services/reading-time'),
-        minutesToRead: jest.fn()
+        minutesToRead: jest.fn(),
     }
 })
 
@@ -14,14 +14,7 @@ let onError
 let onNoResults
 
 const createPost = (content = 'Test Content') => {
-    return Post.create(
-        'Test Title',
-        'Test Community',
-        content,
-        'Test Content HTML',
-        'Test URL',
-        'Test Community URL'
-    )
+    return Post.create('Test Title', 'Test Community', content, 'Test Content HTML', 'Test URL', 'Test Community URL')
 }
 
 describe('posts', () => {
@@ -34,13 +27,7 @@ describe('posts', () => {
     test('should call onNoResults when the API returns an empty array', () => {
         const mockConnector = () => Promise.resolve([])
 
-        return posts.load(
-            mockConnector,
-            5,
-            onSuccess,
-            onError,
-            onNoResults
-        ).then(_ => {
+        return posts.load(mockConnector, 5, onSuccess, onError, onNoResults).then(_ => {
             expect(onNoResults).toHaveBeenCalled()
             expect(onSuccess).not.toHaveBeenCalled()
             expect(onError).not.toHaveBeenCalled()
@@ -48,21 +35,11 @@ describe('posts', () => {
     })
 
     test('should call onNoResults when the API returns posts that surpass the specified user minutes', () => {
-        const mockConnector = () => Promise.resolve([
-            createPost(),
-            createPost(),
-            createPost()
-        ])
+        const mockConnector = () => Promise.resolve([createPost(), createPost(), createPost()])
 
         minutesToRead.mockReturnValue(5)
 
-        return posts.load(
-            mockConnector,
-            2,
-            onSuccess,
-            onError,
-            onNoResults
-        ).then(_ => {
+        return posts.load(mockConnector, 2, onSuccess, onError, onNoResults).then(_ => {
             expect(onNoResults).toHaveBeenCalled()
             expect(onSuccess).not.toHaveBeenCalled()
             expect(onError).not.toHaveBeenCalled()
@@ -70,16 +47,10 @@ describe('posts', () => {
     })
 
     test('should call onError when the API returns an error', () => {
-        const error = new Error
+        const error = new Error()
         const mockedConnector = () => Promise.reject(error)
 
-        return posts.load(
-            mockedConnector,
-            2,
-            onSuccess,
-            onError,
-            onNoResults
-        ).then(_ => {
+        return posts.load(mockedConnector, 2, onSuccess, onError, onNoResults).then(_ => {
             expect(onError).toHaveBeenCalledWith(error)
             expect(onSuccess).not.toHaveBeenCalled()
             expect(onNoResults).not.toHaveBeenCalled()
@@ -92,13 +63,7 @@ describe('posts', () => {
 
         minutesToRead.mockReturnValue(1)
 
-        return posts.load(
-            mockedConnector,
-            5,
-            onSuccess,
-            onError,
-            onNoResults
-        ).then(_ => {
+        return posts.load(mockedConnector, 5, onSuccess, onError, onNoResults).then(_ => {
             expect(onSuccess).toHaveBeenCalledWith(samplePosts)
             expect(onError).not.toHaveBeenCalled()
             expect(onNoResults).not.toHaveBeenCalled()
@@ -106,23 +71,13 @@ describe('posts', () => {
     })
 
     test('should call onNoResults when content is empty or null', () => {
-        const samplePosts = [...Array(5)]
-            .map(e => createPost(''))
-            .concat([...Array(5)]
-                .map(e => createPost(null)))
+        const samplePosts = [...Array(5)].map(e => createPost('')).concat([...Array(5)].map(e => createPost(null)))
         const mockedConnector = () => Promise.resolve(samplePosts)
 
-        return posts.load(
-            mockedConnector,
-            5,
-            onSuccess,
-            onError,
-            onNoResults
-        ).then(_ => {
+        return posts.load(mockedConnector, 5, onSuccess, onError, onNoResults).then(_ => {
             expect(onNoResults).toHaveBeenCalled()
             expect(onSuccess).not.toHaveBeenCalled
             expect(onError).not.toHaveBeenCalled()
         })
-
     })
 })

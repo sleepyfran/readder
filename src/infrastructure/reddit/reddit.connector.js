@@ -5,6 +5,6 @@ import { subredditPosts, sortByFilters } from './reddit.api'
  *
  * @param {Object} filter Subreddit and sort by option to apply.
  */
-export const redditConnector = (filter) => {
+export const redditConnector = filter => {
     return subredditPosts(filter.subcommunity, filter.options || sortByFilters.hot)
 }

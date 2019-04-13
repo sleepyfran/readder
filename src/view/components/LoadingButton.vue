@@ -1,9 +1,5 @@
 <template>
-    <div
-        class="loading-button"
-        :class="{ disabled : isDisabled, loading: isLoading }"
-        @click="onButtonClicked">
-
+    <div class="loading-button" :class="{ disabled: isDisabled, loading: isLoading }" @click="onButtonClicked">
         <span v-if="!isLoading">{{ text }}</span>
         <font-awesome-icon v-if="isLoading" class="spin" icon="circle-notch" />
     </div>
@@ -15,15 +11,15 @@ export default {
     props: {
         text: {
             type: String,
-            required: true
+            required: true,
         },
         isLoading: {
             type: Boolean,
-            required: true
+            required: true,
         },
         isDisabled: {
-            type: Boolean
-        }
+            type: Boolean,
+        },
     },
     methods: {
         onButtonClicked: function($event) {
@@ -31,8 +27,8 @@ export default {
             if (canBeClicked) {
                 this.$emit('buttonClicked')
             }
-        }
-    }
+        },
+    },
 }
 </script>
 
@@ -81,5 +77,4 @@ export default {
         transform: rotate(360deg);
     }
 }
-
 </style>

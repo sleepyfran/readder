@@ -10,7 +10,7 @@ const set = (key, value, timeToLive) => {
 
     cache.set(key, {
         value,
-        expireDate
+        expireDate,
     })
 }
 

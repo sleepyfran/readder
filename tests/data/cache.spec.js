@@ -30,11 +30,11 @@ const testCacheObject = (key, expected) => {
     expect(element).toEqual(expected)
 }
 
-const addRandomObject = (ttl) => {
+const addRandomObject = ttl => {
     const randomObject = {
         key: Math.random(),
         value: Math.random(),
-        expireDate: ttl ? ttl : -1
+        expireDate: ttl ? ttl : -1,
     }
 
     cache.set(randomObject.key, randomObject.value, ttl)
@@ -49,12 +49,12 @@ describe('set', () => {
 
         testCacheObject(testElementWithoutTtl.key, {
             value: testElementWithoutTtl.value,
-            expireDate: testElementWithoutTtl.expireDate
+            expireDate: testElementWithoutTtl.expireDate,
         })
 
         testCacheObject(testElementWithTtl.key, {
             value: testElementWithTtl.value,
-            expireDate: testElementWithTtl.expireDate
+            expireDate: testElementWithTtl.expireDate,
         })
     })
 
@@ -66,7 +66,7 @@ describe('set', () => {
 
         testCacheObject(testElement.key, {
             value: testElement.value,
-            expireDate: testElement.expireDate
+            expireDate: testElement.expireDate,
         })
     })
 })
@@ -125,7 +125,7 @@ describe('expired cache check', () => {
         testCacheObject(elementToRemove2.key, undefined)
         testCacheObject(elementToKeep.key, {
             value: elementToKeep.value,
-            expireDate: elementToKeep.expireDate
+            expireDate: elementToKeep.expireDate,
         })
 
         cache.stopExpiredCacheCheck()
@@ -142,7 +142,7 @@ describe('expired cache check', () => {
 
         testCacheObject(testElement.key, {
             value: testElement.value,
-            expireDate: testElement.expireDate
+            expireDate: testElement.expireDate,
         })
     })
 })

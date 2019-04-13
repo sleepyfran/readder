@@ -10,12 +10,12 @@ export default new Router({
         {
             path: '/',
             name: 'home',
-            component: Home
+            component: Home,
         },
         {
             path: '/reader',
             name: 'reader',
-            component: Reader
-        }
-    ]
+            component: Reader,
+        },
+    ],
 })

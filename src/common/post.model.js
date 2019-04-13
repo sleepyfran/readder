@@ -15,7 +15,7 @@ export const create = (title, community, content, html, url, communityUrl) => {
         content,
         html,
         url,
-        communityUrl
+        communityUrl,
     }
 }
 

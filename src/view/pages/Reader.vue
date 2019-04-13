@@ -4,7 +4,8 @@
             :title="postTitle"
             :subtitle="postSubreddit"
             @titleClicked="redirectToPost"
-            @subtitleClicked="redirectToSubreddit" />
+            @subtitleClicked="redirectToSubreddit"
+        />
 
         <Content :content="postContent" />
     </div>
@@ -19,52 +20,46 @@ export default {
     name: 'reader',
     components: {
         Header,
-        Content
+        Content,
     },
-    data: function () {
+    data: function() {
         return {
-            postIndex: 0
+            postIndex: 0,
         }
     },
     methods: {
-        redirectToPost: function () {
+        redirectToPost: function() {
             window.open(this.currentPost.url)
         },
 
-        redirectToSubreddit: function () {
+        redirectToSubreddit: function() {
             window.open(this.currentPost.subredditUrl)
-        }
+        },
     },
     computed: {
-        currentPost: function () {
+        currentPost: function() {
             return this.$store.state.posts.results[this.postIndex]
         },
 
-        postTitle: function () {
-            return this.currentPost
-                ? this.currentPost.title
-                : ''
+        postTitle: function() {
+            return this.currentPost ? this.currentPost.title : ''
         },
 
-        postSubreddit: function () {
-            return this.currentPost
-                ? this.currentPost.community
-                : ''
+        postSubreddit: function() {
+            return this.currentPost ? this.currentPost.community : ''
         },
 
-        postContent: function () {
-            return this.currentPost
-                ? this.currentPost.html
-                : ''
-        }
+        postContent: function() {
+            return this.currentPost ? this.currentPost.html : ''
+        },
     },
 
     /* Hooks */
-    created: function () {
+    created: function() {
         // If we have nothing to show, redirect home.
         if (isEmpty(this.$store.state.posts.results)) {
             this.$router.replace('/')
         }
-    }
+    },
 }
 </script>

@@ -1,16 +1,18 @@
 <template>
-  <div class="home">
+    <div class="home">
         <Header title="Readder" />
         <PreferenceSelection
             :suggestedCommunities="suggestedCommunities"
             :minutes.sync="selectedMinutes"
-            :community.sync="selectedSubcommunity" />
+            :community.sync="selectedSubcommunity"
+        />
         <LoadingButton
             text="Show me!"
             :isLoading="isLoading"
             :isDisabled="isDisabled"
-            @buttonClicked="onButtonClicked" />
-  </div>
+            @buttonClicked="onButtonClicked"
+        />
+    </div>
 </template>
 
 <script>
@@ -25,45 +27,44 @@ export default {
     components: {
         Header,
         PreferenceSelection,
-        LoadingButton
+        LoadingButton,
     },
     data: function() {
         return {
             selectedMinutes: 0,
             selectedCommunity: 'reddit',
             selectedSubcommunity: '',
-            isDisabled: false
+            isDisabled: false,
         }
     },
     methods: {
         ...mapActions('posts', {
-            loadPosts: 'loadPostsFor'
+            loadPosts: 'loadPostsFor',
         }),
 
-        onButtonClicked: function () {
+        onButtonClicked: function() {
             this.loadPosts({
                 minutes: this.selectedMinutes,
                 community: this.selectedCommunity,
-                subcommunity: this.selectedSubcommunity
+                subcommunity: this.selectedSubcommunity,
             }).then(() => {
                 this.$router.push('/reader')
             })
-        }
+        },
     },
     computed: {
         suggestedCommunities: function() {
             return ['nosleep', 'lifeofnorman', 'philosophy', 'history'] // TODO: Move this somewhere else.
         },
 
-        isLoading: function () {
+        isLoading: function() {
             return this.$store.state.posts.loadingStatus === loadingTypes.loading
-        }
-    }
+        },
+    },
 }
 </script>
 
 <style lang="scss" scoped>
-
 .home {
     display: flex;
     flex-direction: column;
@@ -78,5 +79,4 @@ export default {
         margin-top: 2%;
     }
 }
-
 </style>
