@@ -35,7 +35,8 @@ export default {
         color: var(--heart);
     }
 
-    .item:not(:first-child) {
+    .item:not(:first-child)::before {
+        content: '';
         border-left: solid 1px var(--primary);
         margin-left: 10px;
         padding-left: 10px;
