@@ -140,7 +140,7 @@ export default {
 
     & .suggestions {
         background-color: var(--primary);
-        color: var(--background);
+        color: var(--textOnBackground);
         position: absolute;
         opacity: 0.9;
         width: 100%;
