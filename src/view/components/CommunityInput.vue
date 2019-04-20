@@ -10,6 +10,7 @@
                 @keydown.down="nextIndex"
                 @keydown.up="previousIndex"
                 @click="inputClicked = true"
+                :placeholder="!selectedCommunity ? 'community/' : 'subcommunity'"
             />
         </div>
         <div class="suggestions" v-if="showSuggestions">

@@ -8,12 +8,7 @@
             :subcommunity.sync="selectedSubcommunity"
             @enterPressed="loadPosts"
         />
-        <LoadingButton
-            :text="disabled ? 'Specify a community first' : 'Show me!'"
-            :loading="loading"
-            :disabled="disabled"
-            @buttonClicked="loadPosts"
-        />
+        <LoadingButton :text="buttonText" :loading="loading" :disabled="disabled" @buttonClicked="loadPosts" />
     </div>
 </template>
 
@@ -35,21 +30,24 @@ export default {
     data: function() {
         return {
             selectedMinutes: 0,
-            selectedCommunity: 'reddit',
-            selectedSubcommunity: '',
+            selectedCommunity: undefined,
+            selectedSubcommunity: undefined,
         }
     },
     computed: {
-        suggestedCommunities: function() {
-            return ['nosleep', 'lifeofnorman', 'philosophy', 'history'] // TODO: Move this somewhere else.
-        },
-
         loading: function() {
             return this.$store.state.posts.loadingStatus === loadingTypes.loading
         },
 
         disabled: function() {
             return !this.selectedCommunity || isEmpty(this.selectedSubcommunity)
+        },
+
+        buttonText: function() {
+            if (!this.selectedCommunity) return 'Specify a community'
+            if (!this.selectedSubcommunity) return 'Specify a subcommunity'
+
+            return 'Show me!'
         },
     },
     methods: {
