@@ -9,6 +9,7 @@
                 @keydown.delete="removeCommunity"
                 @keydown.down="nextIndex"
                 @keydown.up="previousIndex"
+                @click="inputClicked = true"
             />
         </div>
         <div class="suggestions" v-if="showSuggestions">
@@ -47,6 +48,7 @@ export default {
     ],
     data: () => ({
         inputText: '',
+        inputClicked: false,
         selectedCommunity: undefined,
         selectedIndex: 0,
     }),
@@ -101,7 +103,7 @@ export default {
         },
 
         showSuggestions: function() {
-            return this.inputText.length > 0
+            return this.inputText.length > 0 || this.inputClicked
         },
     },
     watch: {
