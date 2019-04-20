@@ -163,7 +163,7 @@ export default {
                 }
 
                 @mixin selected() {
-                    background-color: black;
+                    background-color: var(--hovered);
                 }
 
                 &.selected {
