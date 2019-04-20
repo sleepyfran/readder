@@ -34,6 +34,15 @@ export default {
             isDisabled: false,
         }
     },
+    computed: {
+        suggestedCommunities: function() {
+            return ['nosleep', 'lifeofnorman', 'philosophy', 'history'] // TODO: Move this somewhere else.
+        },
+
+        isLoading: function() {
+            return this.$store.state.posts.loadingStatus === loadingTypes.loading
+        },
+    },
     methods: {
         ...mapActions('posts', ['loadPostsFor']),
 
@@ -49,15 +58,6 @@ export default {
 
         toReaderPage: function() {
             this.$router.push('/reader')
-        },
-    },
-    computed: {
-        suggestedCommunities: function() {
-            return ['nosleep', 'lifeofnorman', 'philosophy', 'history'] // TODO: Move this somewhere else.
-        },
-
-        isLoading: function() {
-            return this.$store.state.posts.loadingStatus === loadingTypes.loading
         },
     },
 }

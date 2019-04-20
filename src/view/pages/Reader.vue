@@ -27,15 +27,6 @@ export default {
             postIndex: 0,
         }
     },
-    methods: {
-        redirectToPost: function() {
-            window.open(this.currentPost.url)
-        },
-
-        redirectToSubreddit: function() {
-            window.open(this.currentPost.subredditUrl)
-        },
-    },
     computed: {
         currentPost: function() {
             return this.$store.state.posts.results[this.postIndex]
@@ -53,13 +44,20 @@ export default {
             return this.currentPost ? this.currentPost.html : ''
         },
     },
-
-    /* Hooks */
     created: function() {
         // If we have nothing to show, redirect home.
         if (isEmpty(this.$store.state.posts.results)) {
             this.$router.replace('/')
         }
+    },
+    methods: {
+        redirectToPost: function() {
+            window.open(this.currentPost.url)
+        },
+
+        redirectToSubreddit: function() {
+            window.open(this.currentPost.subredditUrl)
+        },
     },
 }
 </script>

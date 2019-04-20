@@ -32,6 +32,14 @@ export default {
             subcommunity: '',
         }
     },
+    computed: {
+        minutesText: function() {
+            return this.minutes == 1 ? 'minute' : 'minutes'
+        },
+    },
+    created: function() {
+        this.$emit('update:minutes', this.minutes)
+    },
     methods: {
         onEnterPressed: function() {
             this.$emit('enterPressed')
@@ -49,14 +57,6 @@ export default {
         subcommunity: function(val) {
             this.$emit('update:subcommunity', val)
         },
-    },
-    computed: {
-        minutesText: function() {
-            return this.minutes == 1 ? 'minute' : 'minutes'
-        },
-    },
-    created: function() {
-        this.$emit('update:minutes', this.minutes)
     },
 }
 </script>

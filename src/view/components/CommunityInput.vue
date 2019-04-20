@@ -52,6 +52,18 @@ export default {
         selectedCommunity: undefined,
         selectedIndex: 0,
     }),
+    computed: {
+        suggestions: function() {
+            const communityAlreadySelected = this.selectedCommunity
+            if (communityAlreadySelected) return []
+
+            return findCommunities(this.$options.communities, this.inputText)
+        },
+
+        showSuggestions: function() {
+            return this.inputText.length > 0 || this.inputClicked
+        },
+    },
     methods: {
         onEnter: function() {
             const communityAlreadySelected = this.selectedCommunity
@@ -89,18 +101,6 @@ export default {
 
         notifyEnter: function() {
             this.$emit('enterPressed')
-        },
-    },
-    computed: {
-        suggestions: function() {
-            const communityAlreadySelected = this.selectedCommunity
-            if (communityAlreadySelected) return []
-
-            return findCommunities(this.$options.communities, this.inputText)
-        },
-
-        showSuggestions: function() {
-            return this.inputText.length > 0 || this.inputClicked
         },
     },
     watch: {
