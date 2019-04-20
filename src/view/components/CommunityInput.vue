@@ -38,12 +38,12 @@ const findCommunities = (communities, query) => communities.filter(c => communit
 export default {
     communities: [
         {
-            keyword: 'dev#',
-            name: 'dev.to',
-        },
-        {
             keyword: 'r/',
             name: 'reddit',
+        },
+        {
+            keyword: 'dev#',
+            name: 'dev.to',
         },
     ],
     data: () => ({
