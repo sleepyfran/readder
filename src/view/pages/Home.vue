@@ -4,14 +4,11 @@
         <PreferenceSelection
             :suggestedCommunities="suggestedCommunities"
             :minutes.sync="selectedMinutes"
-            :community.sync="selectedSubcommunity"
+            :community.sync="selectedCommunity"
+            :subcommunity.sync="selectedSubcommunity"
+            @enterPressed="loadPosts"
         />
-        <LoadingButton
-            text="Show me!"
-            :isLoading="isLoading"
-            :isDisabled="isDisabled"
-            @buttonClicked="onButtonClicked"
-        />
+        <LoadingButton text="Show me!" :isLoading="isLoading" :isDisabled="isDisabled" @buttonClicked="loadPosts" />
     </div>
 </template>
 
@@ -38,18 +35,20 @@ export default {
         }
     },
     methods: {
-        ...mapActions('posts', {
-            loadPosts: 'loadPostsFor',
-        }),
+        ...mapActions('posts', ['loadPostsFor']),
 
-        onButtonClicked: function() {
-            this.loadPosts({
+        loadPosts: function() {
+            this.loadPostsFor({
                 minutes: this.selectedMinutes,
-                community: this.selectedCommunity,
+                community: this.selectedCommunity.name,
                 subcommunity: this.selectedSubcommunity,
             }).then(() => {
-                this.$router.push('/reader')
+                this.toReaderPage()
             })
+        },
+
+        toReaderPage: function() {
+            this.$router.push('/reader')
         },
     },
     computed: {

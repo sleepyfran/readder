@@ -65,7 +65,6 @@ export default {
             this.selectedCommunity = this.suggestions[this.selectedIndex]
             this.inputText = ''
             this.selectedIndex = 0
-            this.$emit('communitySelected', this.selectedCommunity)
         },
 
         removeCommunity: function() {
@@ -108,6 +107,17 @@ export default {
     watch: {
         suggestions: function(val) {
             this.selectedIndex = 0
+        },
+
+        selectedCommunity: function(val) {
+            this.$emit('update:community', val)
+        },
+
+        inputText: function(val) {
+            const noCommunitySelected = !this.selectedCommunity
+            if (noCommunitySelected) return
+
+            this.$emit('update:subcommunity', val)
         },
     },
 }

@@ -7,7 +7,11 @@
         </div>
         <div class="preference-item">
             <p>to read from</p>
-            <CommunityInput />
+            <CommunityInput
+                :community.sync="community"
+                :subcommunity.sync="subcommunity"
+                @enterPressed="onEnterPressed"
+            />
         </div>
     </div>
 </template>
@@ -21,24 +25,29 @@ export default {
     components: {
         CommunityInput,
     },
-    props: {
-        suggestedCommunities: {
-            type: Array,
-            required: true,
-        },
-    },
     data: function() {
         return {
             minutes: 5,
-            community: '',
+            community: undefined,
+            subcommunity: '',
         }
     },
-    watch: {
-        minutes: function(value) {
-            this.$emit('update:minutes', value)
+    methods: {
+        onEnterPressed: function() {
+            this.$emit('enterPressed')
         },
-        community: function(value) {
-            this.$emit('update:community', value)
+    },
+    watch: {
+        minutes: function(val) {
+            this.$emit('update:minutes', val)
+        },
+
+        community: function(val) {
+            this.$emit('update:community', val)
+        },
+
+        subcommunity: function(val) {
+            this.$emit('update:subcommunity', val)
         },
     },
     computed: {
@@ -48,7 +57,6 @@ export default {
     },
     created: function() {
         this.$emit('update:minutes', this.minutes)
-        this.community = sample(this.suggestedCommunities)
     },
 }
 </script>
