@@ -8,7 +8,12 @@
             :subcommunity.sync="selectedSubcommunity"
             @enterPressed="loadPosts"
         />
-        <LoadingButton text="Show me!" :isLoading="isLoading" :isDisabled="isDisabled" @buttonClicked="loadPosts" />
+        <LoadingButton
+            :text="disabled ? 'Specify a community first' : 'Show me!'"
+            :loading="loading"
+            :disabled="disabled"
+            @buttonClicked="loadPosts"
+        />
     </div>
 </template>
 
@@ -18,6 +23,7 @@ import PreferenceSelection from '@view/components/PreferenceSelection'
 import LoadingButton from '@view/components/LoadingButton'
 import loadingTypes from '@store/modules/posts/loading-types'
 import { mapActions } from 'vuex'
+import { isEmpty } from 'lodash'
 
 export default {
     name: 'home',
@@ -31,7 +37,6 @@ export default {
             selectedMinutes: 0,
             selectedCommunity: 'reddit',
             selectedSubcommunity: '',
-            isDisabled: false,
         }
     },
     computed: {
@@ -39,8 +44,12 @@ export default {
             return ['nosleep', 'lifeofnorman', 'philosophy', 'history'] // TODO: Move this somewhere else.
         },
 
-        isLoading: function() {
+        loading: function() {
             return this.$store.state.posts.loadingStatus === loadingTypes.loading
+        },
+
+        disabled: function() {
+            return !this.selectedCommunity || isEmpty(this.selectedSubcommunity)
         },
     },
     methods: {

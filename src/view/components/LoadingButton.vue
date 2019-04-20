@@ -1,7 +1,7 @@
 <template>
-    <div class="loading-button" :class="{ disabled: isDisabled, loading: isLoading }" @click="onButtonClicked">
-        <span v-if="!isLoading">{{ text }}</span>
-        <font-awesome-icon v-if="isLoading" class="spin" icon="circle-notch" />
+    <div class="loading-button" :class="{ disabled: disabled, loading: loading }" @click="onButtonClicked">
+        <span v-if="!loading">{{ text }}</span>
+        <font-awesome-icon v-if="loading" class="spin" icon="circle-notch" />
     </div>
 </template>
 
@@ -13,17 +13,17 @@ export default {
             type: String,
             required: true,
         },
-        isLoading: {
+        loading: {
             type: Boolean,
             required: true,
         },
-        isDisabled: {
+        disabled: {
             type: Boolean,
         },
     },
     methods: {
         onButtonClicked: function($event) {
-            const canBeClicked = !this.isDisabled && !this.isLoading
+            const canBeClicked = !this.disabled && !this.loading
             if (canBeClicked) {
                 this.$emit('buttonClicked')
             }
