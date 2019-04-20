@@ -54,9 +54,6 @@ export default {
     }),
     methods: {
         onEnter: function() {
-            const noTextToNotify = this.inputText.length === 0
-            if (noTextToNotify) return
-
             const communityAlreadySelected = this.selectedCommunity
             if (communityAlreadySelected) return this.notifyEnter()
 
