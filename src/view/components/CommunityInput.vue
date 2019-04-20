@@ -1,6 +1,6 @@
 <template>
     <div class="community-input">
-        <div class="text-input">
+        <div class="text-input animated">
             <div class="selected-community" v-if="selectedCommunity">{{ selectedCommunity.keyword }}</div>
             <input
                 type="text"
@@ -125,9 +125,14 @@ export default {
 
 <style lang="scss" scoped>
 @import '@view/styles/_fonts.scss';
+@import '@view/styles/_animations.scss';
 
 .community-input {
     position: relative;
+
+    & .animated {
+        transition: $default-transition;
+    }
 
     & input {
         background-color: var(--background-color);
