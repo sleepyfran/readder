@@ -2,21 +2,25 @@
     <div class="preference-selection">
         <div class="preference-item">
             <p>I have</p>
-            <input class="minutes-input" type="number" v-model.number="minutes" />
+            <input class="text-input minutes-input" type="number" v-model.number="minutes" />
             <p>{{ minutesText }}</p>
         </div>
         <div class="preference-item">
-            <p>to read from r/</p>
-            <input type="text" v-model="community" />
+            <p>to read from</p>
+            <CommunityInput />
         </div>
     </div>
 </template>
 
 <script>
+import CommunityInput from '@view/components/CommunityInput'
 import { sample } from 'lodash'
 
 export default {
     name: 'preferences-selection',
+    components: {
+        CommunityInput,
+    },
     props: {
         suggestedCommunities: {
             type: Array,
@@ -70,27 +74,17 @@ $min-column-size: 900px;
             margin: 0;
         }
 
-        & input {
-            border: none;
-            outline: none;
-            font-size: 1em;
-            text-align: center;
-            background-color: var(--background);
-            border-bottom: 2px solid var(--primary);
-            color: var(--primary);
+        & .minutes-input {
+            max-width: 100px;
 
-            &.minutes-input {
-                max-width: 100px;
+            @media (max-width: $min-column-size) {
+                max-width: 50px;
+            }
 
-                @media (max-width: $min-column-size) {
-                    max-width: 50px;
-                }
-
-                /* Disables the increase/decrease buttons. */
-                &::-webkit-inner-spin-button,
-                &::-webkit-outer-spin-button {
-                    appearance: none;
-                }
+            /* Disables the increase/decrease buttons. */
+            &::-webkit-inner-spin-button,
+            &::-webkit-outer-spin-button {
+                appearance: none;
             }
         }
 

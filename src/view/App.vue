@@ -73,4 +73,15 @@ body {
         color: var(--hovered);
     }
 }
+
+/* Base style for any text input in the app. */
+.text-input {
+    border: none;
+    outline: none;
+    font-size: $text-input-font-size;
+    text-align: center;
+    background-color: var(--background);
+    border-bottom: 2px solid var(--primary);
+    color: var(--primary);
+}
 </style>
