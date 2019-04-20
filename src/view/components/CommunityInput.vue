@@ -1,6 +1,6 @@
 <template>
     <div class="community-input">
-        <div class="text-input animated">
+        <div class="text-input input-wrapper">
             <div class="selected-community" v-if="selectedCommunity">{{ selectedCommunity.keyword }}</div>
             <input
                 type="text"
@@ -10,7 +10,7 @@
                 @keydown.down="nextIndex"
                 @keydown.up="previousIndex"
                 @click="inputClicked = true"
-                :placeholder="!selectedCommunity ? 'community/' : 'subcommunity'"
+                :placeholder="!selectedCommunity ? 'community' : 'subcommunity'"
             />
         </div>
         <div class="suggestions" v-if="showSuggestions">
@@ -63,7 +63,7 @@ export default {
             this.selectCommunity()
         },
 
-        selectCommunity: function(community) {
+        selectCommunity: function() {
             this.selectedCommunity = this.suggestions[this.selectedIndex]
             this.inputText = ''
             this.selectedIndex = 0
@@ -120,7 +120,7 @@ export default {
 .community-input {
     position: relative;
 
-    & .animated {
+    & .input-wrapper {
         transition: $default-transition;
     }
 
