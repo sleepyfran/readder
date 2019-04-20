@@ -37,16 +37,6 @@ const communityMatches = (community, input) => includes(community.name, input) |
 const findCommunities = (communities, query) => communities.filter(c => communityMatches(c, query))
 
 export default {
-    communities: [
-        {
-            keyword: 'r/',
-            name: 'reddit',
-        },
-        {
-            keyword: 'dev#',
-            name: 'dev.to',
-        },
-    ],
     data: () => ({
         inputText: '',
         inputClicked: false,
@@ -58,7 +48,7 @@ export default {
             const communityAlreadySelected = this.selectedCommunity
             if (communityAlreadySelected) return []
 
-            return findCommunities(this.$options.communities, this.inputText)
+            return findCommunities(this.$store.state.communities, this.inputText)
         },
 
         showSuggestions: function() {

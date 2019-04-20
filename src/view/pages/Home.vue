@@ -2,7 +2,6 @@
     <div class="home">
         <Header title="Readder" />
         <PreferenceSelection
-            :suggestedCommunities="suggestedCommunities"
             :minutes.sync="selectedMinutes"
             :community.sync="selectedCommunity"
             :subcommunity.sync="selectedSubcommunity"

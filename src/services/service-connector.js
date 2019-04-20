@@ -32,4 +32,18 @@ export const loadFrom = (filter, onSuccess, onError, onNoResults) => {
     return load(() => connector(filter), filter.minutes, onSuccess, onError, onNoResults)
 }
 
-export default { loadFrom }
+/**
+ * List of services available right now in the app. This will be matched in the getConnectorForCommunity method.
+ */
+export const services = [
+    {
+        keyword: 'r/',
+        name: 'reddit',
+    },
+    // {
+    //     keyword: 'dev#',
+    //     name: 'dev.to',
+    // },
+]
+
+export default { services, loadFrom }
