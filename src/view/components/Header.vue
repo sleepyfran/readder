@@ -7,7 +7,7 @@
 
         <div class="settings">
             <font-awesome-icon class="hoverable" @click="onThemeChangeClicked" icon="moon" />
-            <font-awesome-icon class="hoverable" @click="onFontChangeClicked" icon="font" />
+            <!-- <font-awesome-icon class="hoverable" @click="onFontChangeClicked" icon="font" /> -->
         </div>
     </div>
 </template>
