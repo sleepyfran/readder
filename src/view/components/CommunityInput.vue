@@ -34,7 +34,7 @@
 import { includes } from 'lodash'
 
 const communityMatches = (community, input) => includes(community.name, input) || includes(community.keyword, input)
-const findCommunities = (communities, query) => communities.filter(c => communityMatches(c, query))
+const findCommunities = (communities, query) => communities.filter(c => communityMatches(c, query.toLowerCase()))
 
 export default {
     data: () => ({
