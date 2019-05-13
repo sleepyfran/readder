@@ -1,9 +1,19 @@
 {
+    "compilerOptions": {
+        "target": "es2017",
+        "baseUrl": "./",
+        "paths": {
+            "@assets/*": ["src/assets/*"],
+            "@common/*": ["src/common/*"],
+            "@data/*": ["src/data/*"],
+            "@infrastructure/*": ["src/infrastructure/*"],
+            "@services/*": ["src/services/*"],
+            "@store/*": ["src/store/*"],
+            "@view/*": ["src/view/*"]
+        }
+    },
+    "exclude": ["node_modules"],
     "typeAcquisition": {
-        "include": [
-            "jest",
-            "rewire",
-            "lodash"
-        ]
+        "include": ["jest", "rewire", "lodash"]
     }
 }
