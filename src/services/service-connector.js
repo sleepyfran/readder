@@ -1,19 +1,35 @@
 import { redditConnector } from '@infrastructure/reddit/reddit.connector.js'
+import { devtoConnector } from '@infrastructure/dev.to/devto.connector'
 import { load } from './posts'
 import UnrecognizedService from '@common/unrecognized-service.error'
 
 /**
+ * List of services available right now in the app. This will be matched in the getConnectorForCommunity method.
+ */
+export const services = [
+    {
+        keyword: 'r/',
+        name: 'reddit',
+        connector: redditConnector,
+    },
+    {
+        keyword: 'dev#',
+        name: 'dev.to',
+        connector: devtoConnector,
+    },
+]
+
+/**
  * Retrieves the connector function for the specified community.
  *
- * @param {string} community Name of the community.
+ * @param {Object} filter Number of available minutes to read, community, subcommunity and any extra data that the
+ * service needs (such as sort by options for reddit, etc.).
  */
 const getConnectorForCommunity = filter => {
-    switch (filter.community) {
-        case 'reddit':
-            return redditConnector
-        default:
-            return () => Promise.reject(new UnrecognizedService())
-    }
+    const matchingService = services.find(s => s.name === filter.community)
+    if (!matchingService) return () => Promise.reject(new UnrecognizedService())
+
+    return matchingService.connector
 }
 
 /**
@@ -29,21 +45,7 @@ const getConnectorForCommunity = filter => {
 export const loadFrom = (filter, onSuccess, onError, onNoResults) => {
     const connector = getConnectorForCommunity(filter)
 
-    return load(() => connector(filter), filter.minutes, onSuccess, onError, onNoResults)
+    return load(async () => await connector(filter), filter.minutes, onSuccess, onError, onNoResults)
 }
-
-/**
- * List of services available right now in the app. This will be matched in the getConnectorForCommunity method.
- */
-export const services = [
-    {
-        keyword: 'r/',
-        name: 'reddit',
-    },
-    // {
-    //     keyword: 'dev#',
-    //     name: 'dev.to',
-    // },
-]
 
 export default { services, loadFrom }
