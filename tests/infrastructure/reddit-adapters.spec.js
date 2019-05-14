@@ -80,7 +80,7 @@ describe('transform', () => {
 
             expect(actualPost.title).toEqual(expectedPost.title)
             expect(actualPost.content).toEqual(expectedPost.selftext)
-            expect(actualPost.htmlContent).toEqual(expectedPost.selftext_html)
+            expect(actualPost.html).toEqual(expectedPost.selftext_html)
             expect(actualPost.url).toEqual(expectedPost.url)
         }
     })

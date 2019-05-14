@@ -1,6 +1,7 @@
 import { isEmpty } from 'lodash'
 import Post from '@common/post.model'
 import MalformedData from '@common/malformed-data.error'
+import { checkKeys } from '@infrastructure/adapter.utils'
 
 const MALFORMED_ERROR = 'The provided JSON is not a valid object'
 
@@ -20,9 +21,12 @@ const generateTagUrl = tagName => {
 export const transform = (posts, tag) => {
     if (isEmpty(posts)) return []
 
-    return posts.map(p => {
-        const htmlBody = p['body_html']
-        return Post.create(p['title'], formatTagName(tag), htmlBody, htmlBody, p['url'], generateTagUrl(tag))
+    return posts.map(post => {
+        const containsErrors = checkKeys(post, ['body_html', 'title', 'url'])
+        if (containsErrors) throw new MalformedData(MALFORMED_ERROR)
+
+        const htmlBody = post['body_html']
+        return Post.create(post['title'], formatTagName(tag), htmlBody, htmlBody, post['url'], generateTagUrl(tag))
     })
 }
 
