@@ -5,7 +5,7 @@ import MalformedData from '@common/malformed-data.error'
 const MALFORMED_ERROR = 'The provided JSON is not a valid object'
 
 const formatTagName = tagName => {
-    return `#/${tagName}`
+    return `#${tagName}`
 }
 
 const generateTagUrl = tagName => {
@@ -19,8 +19,6 @@ const generateTagUrl = tagName => {
  */
 export const transform = (posts, tag) => {
     if (isEmpty(posts)) return []
-
-    console.log(posts)
 
     return posts.map(p => {
         const htmlBody = p['body_html']
