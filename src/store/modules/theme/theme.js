@@ -1,4 +1,5 @@
 import themeTypes from './theme-types'
+import { setTheme } from '@/infrastructure/storage'
 import { CHANGE_THEME, SWITCH_THEME } from './mutation-types'
 
 const state = {
@@ -16,6 +17,7 @@ const actions = {
         const switchedTheme = state.activeTheme === themeTypes.light ? themeTypes.dark : themeTypes.light
 
         commit(CHANGE_THEME, switchedTheme)
+        setTheme(switchedTheme)
     },
 }
 
