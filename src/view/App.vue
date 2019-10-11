@@ -36,16 +36,19 @@ export default {
          * If browser supports "prefers-color-scheme" it will respect the setting for light or dark mode
          * TODO: Also persist the color scheme via localStorage
          */
-        const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
-        const isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches ||
-            window.matchMedia("(prefers-color-scheme: no-preference)").matches
+        const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+        const isLightMode =
+            window.matchMedia('(prefers-color-scheme: light)').matches ||
+            window.matchMedia('(prefers-color-scheme: no-preference)').matches
 
-        window.matchMedia("(prefers-color-scheme: dark)").addListener(e => e.matches && this.activateDarkMode())
-        window.matchMedia("(prefers-color-scheme: light)").addListener(e => e.matches && this.activateLightMode())
-        window.matchMedia("(prefers-color-scheme: no-preference)").addListener(e => e.matches && this.activateLightMode())
+        window.matchMedia('(prefers-color-scheme: dark)').addListener(e => e.matches && this.activateDarkMode())
+        window.matchMedia('(prefers-color-scheme: light)').addListener(e => e.matches && this.activateLightMode())
+        window
+            .matchMedia('(prefers-color-scheme: no-preference)')
+            .addListener(e => e.matches && this.activateLightMode())
 
-        if(isDarkMode) this.activateDarkMode()
-        if(isLightMode) this.activateLightMode()
+        if (isDarkMode) this.activateDarkMode()
+        if (isLightMode) this.activateLightMode()
     },
     methods: {
         ...mapActions('theme', [SWITCH_THEME]),
