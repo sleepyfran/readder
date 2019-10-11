@@ -8,6 +8,8 @@ Also available as an [iOS app](https://github.com/sleepyfran/readder-ios).
 ## Contributing
 Every contribution is welcome! Just take a look at the issues to see what's on the making right now or open your own issue if you want any feature to be implemented.
 
+Consider using the [gitmoji CLI](https://github.com/carloscuesta/gitmoji-cli) to follow the commit style 😄
+
 ## Building
 First you need to install all the dependencies:
 
