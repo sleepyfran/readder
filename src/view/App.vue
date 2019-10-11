@@ -10,6 +10,7 @@
 <script>
 import Footer from '@view/components/Footer'
 import themeTypes from '@store/modules/theme/theme-types'
+import { getTheme, setTheme } from '@/infrastructure/storage'
 import { CHANGE_THEME } from '@store/modules/theme/mutation-types'
 import { mapMutations } from 'vuex'
 
@@ -36,7 +37,7 @@ export default {
          * We firstly check if a color scheme is already saved
          * If browser supports "prefers-color-scheme" it will respect the setting for light or dark mode
          */
-        const savedThemePreference = localStorage.themePreference
+        const savedThemePreference = getTheme()
 
         if (savedThemePreference) {
             this.changeTheme(savedThemePreference)
@@ -60,11 +61,11 @@ export default {
         ...mapMutations('theme', [CHANGE_THEME]),
         activateLightMode: function() {
             this.changeTheme(themeTypes.light)
-            localStorage.themePreference = themeTypes.light
+            setTheme(themeTypes.light)
         },
         activateDarkMode: function() {
             this.changeTheme(themeTypes.dark)
-            localStorage.themePreference = themeTypes.dark
+            setTheme(themeTypes.dark)
         },
     },
 }
