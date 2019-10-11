@@ -16,6 +16,7 @@ const actions = {
         const switchedTheme = state.activeTheme === themeTypes.light ? themeTypes.dark : themeTypes.light
 
         commit(CHANGE_THEME, switchedTheme)
+        localStorage.themePreference = switchedTheme
     },
 }
 
