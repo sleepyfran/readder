@@ -16,5 +16,5 @@ jobs:
         ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
         BASE_BRANCH: master
         BRANCH: gh-pages
-        FOLDER: build
+        FOLDER: dist
         BUILD_SCRIPT: npm install && npm run test:unit && npm run build
