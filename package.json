@@ -17,7 +17,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.15",
     "@fortawesome/free-solid-svg-icons": "^5.7.2",
     "@fortawesome/vue-fontawesome": "^0.1.5",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "rewire": "^4.0.1",
     "vue": "^2.6.6",
     "vue-router": "^3.0.1",
