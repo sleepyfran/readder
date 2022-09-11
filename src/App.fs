@@ -1,6 +1,8 @@
 module Readder.App
 
 open Elmish
+open Lit
+open Readder
 open Readder.AppTypes
 open Readder.Screens
 open Readder.Screens.Root
@@ -19,5 +21,14 @@ let update cmd state =
         appState, appCmd
 
 let view state dispatch =
-    match state.CurrentScreen with
-    | Screen.Home -> Home.render state.HomeState (HomeCommand >> dispatch)
+    let mainView =
+        match state.CurrentScreen with
+        | Screen.Home -> Home.render state.HomeState (HomeCommand >> dispatch)
+
+    html
+        $"""
+        <div class="h-screen w-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-200">
+            {Header.view}
+            {mainView}
+        </div>
+        """

@@ -20,8 +20,16 @@ let update state cmd =
 let render state dispatch =
     html
         $"""
-        <div>
-            <p>I have</p>
-            <input type="number" @input={EvVal(HomeCommand.ChangeSelectedMinutes >> dispatch)} />
+        <div class="flex justify-center">
+            <p class="mx-10 text-2xl place-content-center">
+                I have
+                <input 
+                    class="inline-block w-12 focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none bg-transparent placeholder-slate-400 rounded-md py-2 pl-1"
+                    placeholder="5"
+                    type="number"
+                    value={state.SelectedMinutes}
+                    @input={EvVal(HomeCommand.ChangeSelectedMinutes >> dispatch)} />
+                minutes to read from
+            </p>
         </div>
         """

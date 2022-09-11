@@ -6,6 +6,7 @@
   <ItemGroup>
     <Compile Include="Screens/Home.fs" />
     <Compile Include="Screens/Screens.fs" />
+    <Compile Include="Header.fs" />
     <Compile Include="AppTypes.fs" />
     <Compile Include="App.fs" />
     <Compile Include="Main.fs" />

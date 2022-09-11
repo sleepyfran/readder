@@ -4,8 +4,9 @@
   "description": "",
   "scripts": {
     "postinstall": "dotnet tool restore",
+    "css": "tailwindcss -i ./src/styles.css -o ./dist/styles.css",
     "format": "dotnet fantomas . --recurse",
-    "start": "dotnet fable src -s --watch --run vite",
+    "start": "dotnet fable watch src --run vite",
     "build": "dotnet fable src --run vite build"
   },
   "dependencies": {
@@ -13,6 +14,9 @@
     "lit-html": "2.0.0"
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.8",
+    "postcss": "^8.4.16",
+    "tailwindcss": "^3.1.8",
     "vite": "^2.5.8"
   }
 }
