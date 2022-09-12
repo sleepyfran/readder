@@ -6,8 +6,8 @@
     "postinstall": "dotnet tool restore",
     "css": "tailwindcss -i ./src/styles.css -o ./dist/styles.css",
     "format": "dotnet fantomas . --recurse",
-    "start": "dotnet fable watch src --run vite",
-    "build": "dotnet fable src --run vite build"
+    "start": "dotnet fable watch src/App --run vite",
+    "build": "dotnet fable src/App --run vite build"
   },
   "dependencies": {
     "lit": "2.0.0",

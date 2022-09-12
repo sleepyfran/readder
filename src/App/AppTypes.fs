@@ -10,8 +10,8 @@ type AppState =
       CurrentScreen: Screen
 
       (* Screen states. *)
-      HomeState: Home.HomeState }
+      HomeState: Home.State }
 
 /// Defines all available commands in the whole app, namespaced by the
 /// originating screen.
-type AppCommand = HomeCommand of Home.HomeCommand
+type AppCommand = HomeCommand of Home.Command

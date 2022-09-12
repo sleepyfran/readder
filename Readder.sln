@@ -1,11 +1,11 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E42FDAEF-1176-49E3-AB58-0FDF60F8DB4F}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "App", "src\App\App.fsproj", "{A41A8B3A-BF13-41DD-A469-8A4957018EB3}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "App", "src\App.fsproj", "{A41A8B3A-BF13-41DD-A469-8A4957018EB3}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Core", "src\Core\Core.fsproj", "{F5F236EA-0950-41FA-9BEE-2BB69C95EE79}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,8 +20,9 @@ Global
 		{A41A8B3A-BF13-41DD-A469-8A4957018EB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A41A8B3A-BF13-41DD-A469-8A4957018EB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A41A8B3A-BF13-41DD-A469-8A4957018EB3}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{A41A8B3A-BF13-41DD-A469-8A4957018EB3} = {E42FDAEF-1176-49E3-AB58-0FDF60F8DB4F}
+		{F5F236EA-0950-41FA-9BEE-2BB69C95EE79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5F236EA-0950-41FA-9BEE-2BB69C95EE79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5F236EA-0950-41FA-9BEE-2BB69C95EE79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5F236EA-0950-41FA-9BEE-2BB69C95EE79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

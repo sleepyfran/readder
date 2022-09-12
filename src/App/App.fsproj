@@ -4,7 +4,8 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Screens/Home.fs" />
+    <Compile Include="Screens/Home/CommunitySelector.fs" />
+    <Compile Include="Screens/Home/Home.fs" />
     <Compile Include="Screens/Screens.fs" />
     <Compile Include="Header.fs" />
     <Compile Include="AppTypes.fs" />
@@ -13,5 +14,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Fable.Lit.Elmish" Version="1.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Core/Core.fsproj" />
   </ItemGroup>
 </Project>
