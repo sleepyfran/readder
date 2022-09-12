@@ -3,7 +3,8 @@ module Readder.Screens.Home
 
 open Elmish
 open Lit
-open Readder.Screens.Components
+open Readder.Screens.Home.Components
+open Readder.Screens.Home.Components.CommonTypes
 
 type State =
     { SelectedMinutes: int
@@ -52,7 +53,9 @@ let render state dispatch =
                 minutes to read from
             </p>
             <div class="mt-5 w-60 sm:w-96">
-                {CommunitySelector.view state.CommunityChoiceState (Command.CommunityChoiceCommand >> dispatch)}
+                {CommunitySelector.view
+                     state.CommunityChoiceState
+                     (Command.CommunityChoiceCommand >> dispatch)}
             </div>
         </div>
         """

@@ -1,34 +1,11 @@
-[<RequireQualifiedAccess>]
-module Readder.Screens.Components.CommunitySelector
+module Readder.Screens.Home.Components.CommunitySelector
 
 open Browser.Types
 open Core.Connectors
 open Core.Math
-open Core.Types
+open Readder.Screens.Home.Components.CommonTypes.CommunitySelector
 open Elmish
 open Lit
-
-type State =
-    {
-      /// Current value of the input.
-      Input: string
-      /// Currently selected community to read from.
-      SelectedCommunity: Community option
-      /// Currently selected index in the suggestions list.
-      SuggestionsSelectedIndex: int
-      /// List of available suggestions.
-      Suggestions: Community list }
-
-[<RequireQualifiedAccess>]
-type Command =
-    | OnInput of input: string
-    | OnArrowUp
-    | OnArrowDown
-    | OnEnter
-    | OnBackspace of input: string
-    | OnHover of index: int
-    | SuggestionsChanged of suggestions: Community list
-    | SuggestionSelected of suggestion: Community
 
 let init =
     { Input = ""
@@ -39,8 +16,6 @@ let init =
 let update state cmd =
     match cmd with
     | Command.OnInput input ->
-        printfn $"Entering on input with {input}"
-
         let suggestionCmd =
             match state.SelectedCommunity with
             | None ->
@@ -94,55 +69,12 @@ let update state cmd =
 
         { state with
             SelectedCommunity = Some suggestion
+            SuggestionsSelectedIndex = 0
             Suggestions = [] },
         Cmd.ofMsg clearInputCmd
 
-let private suggestionItemView dispatch selectedIndex communityIndex community =
-    let classes =
-        Lit.classes [ "group text-2xld text-white hover:bg-slate-800 dark:hover:bg-slate-500 w-full text-start p-2 rounded-md",
-                      true
-                      "bg-slate-800 dark:bg-slate-500",
-                      selectedIndex = communityIndex ]
-
-    html
-        $"""
-        <button
-            class={classes}
-            @mouseover={fun () -> Command.OnHover communityIndex |> dispatch}
-            @click={Ev(fun _ -> Command.SuggestionSelected community |> dispatch)}>
-            <span class="font-bold">{keywordOf community}</span>
-            <span class="font-light">{nameOf community}</span>
-        </button>
-        """
-
-let private suggestionsView state dispatch =
-    if List.isEmpty state.Suggestions
-       || state.SelectedCommunity.IsSome then
-        Lit.nothing
-    else
-        html
-            $"""
-            <div class="flex flex-col items-start bg-slate-400 rounded-xl p-4 mt-1 dark:bg-slate-800" role="menu">
-                <p class="text-gray-200">Suggestions:</p>
-                {state.Suggestions
-                 |> List.mapi (fun index community ->
-                     suggestionItemView dispatch state.SuggestionsSelectedIndex index community)}
-            </div>
-            """
-
 [<HookComponent>]
 let view state dispatch =
-    let selectedCommunity =
-        match state.SelectedCommunity with
-        | Some community ->
-            html
-                $"""
-                <div class="inline-block border-2 border-teal-600 rounded-full px-5">
-                    {keywordOf community}
-                </div>
-                """
-        | None -> Lit.nothing
-
     let placeholder =
         match state.SelectedCommunity with
         | Some _ -> "Subcommunity"
@@ -174,7 +106,7 @@ let view state dispatch =
         $"""
         <div>
             <div class="w-full border-b-2 border-slate-900 dark:border-white text-2xl">
-                {selectedCommunity}
+                {SelectedCommunity.view state}
                 <input
                     class="appearance-none bg-transparent focus:outline-none placeholder-slate-400 py-2 dark:ring-white w-40 md:w-64"
                     type="text"
@@ -185,6 +117,6 @@ let view state dispatch =
                     @keyup={Ev onKeyUp} />
             </div>
 
-            {suggestionsView state dispatch}
+            {Suggestions.view state dispatch}
         </div>
         """
