@@ -27,8 +27,11 @@ let view state dispatch =
 
     html
         $"""
-        <div class="h-screen w-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-200">
+        <div class="flex flex-col min-h-screen w-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-200">
             {Header.view}
-            {mainView}
+            <main class="flex-grow">
+                {mainView}
+            </main>
+            {Footer.view}
         </div>
         """
