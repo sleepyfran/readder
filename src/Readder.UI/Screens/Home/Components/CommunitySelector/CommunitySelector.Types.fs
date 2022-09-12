@@ -1,6 +1,6 @@
-module Readder.Screens.Home.Components.CommonTypes
+module Readder.UI.Screens.Home.Components.CommonTypes
 
-open Core.Types
+open Readder.Core.Types
 
 module CommunitySelector =
     type State =

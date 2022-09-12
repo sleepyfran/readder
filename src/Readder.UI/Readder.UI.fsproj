@@ -19,6 +19,6 @@
     <PackageReference Include="Fable.Lit.Elmish" Version="1.3.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="../Core/Core.fsproj" />
+    <ProjectReference Include="../Readder.Core/Readder.Core.fsproj" />
   </ItemGroup>
 </Project>

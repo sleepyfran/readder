@@ -1,4 +1,4 @@
-module Readder.Header
+module Readder.UI.Header
 
 open Lit
 

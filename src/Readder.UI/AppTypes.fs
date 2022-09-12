@@ -1,7 +1,7 @@
-module Readder.AppTypes
+module Readder.UI.AppTypes
 
-open Readder.Screens
-open Readder.Screens.Root
+open Readder.UI.Screens
+open Readder.UI.Screens.Root
 
 /// Defines the common, global app state.
 type AppState =

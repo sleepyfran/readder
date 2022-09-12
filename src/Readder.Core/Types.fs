@@ -1,4 +1,4 @@
-module Core.Types
+module Readder.Core.Types
 
 /// Defines all available communities that we support.
 type Community =

@@ -1,10 +1,10 @@
 [<RequireQualifiedAccess>]
-module Readder.Screens.Home
+module Readder.UI.Screens.Home
 
 open Elmish
 open Lit
-open Readder.Screens.Home.Components
-open Readder.Screens.Home.Components.CommonTypes
+open Readder.UI.Screens.Home.Components
+open Readder.UI.Screens.Home.Components.CommonTypes
 
 type State =
     { SelectedMinutes: int

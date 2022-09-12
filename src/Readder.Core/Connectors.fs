@@ -1,6 +1,6 @@
-module Core.Connectors
+module Readder.Core.Connectors
 
-open Core.Types
+open Readder.Core.Types
 
 /// Returns the name of the given community.
 let nameOf community =

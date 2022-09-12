@@ -1,11 +1,11 @@
-module Readder.App
+module Readder.UI.App
 
 open Elmish
 open Lit
 open Readder
-open Readder.AppTypes
-open Readder.Screens
-open Readder.Screens.Root
+open Readder.UI.AppTypes
+open Readder.UI.Screens
+open Readder.UI.Screens.Root
 
 let init _ =
     { CurrentScreen = Screen.Home

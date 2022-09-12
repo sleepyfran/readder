@@ -1,4 +1,4 @@
-﻿module Readder.Main
+﻿module Readder.UI.Main
 
 open Elmish
 open Lit.Elmish

@@ -1,9 +1,9 @@
 [<RequireQualifiedAccess>]
-module Readder.Screens.Home.Components.Suggestions
+module Readder.UI.Screens.Home.Components.Suggestions
 
-open Core.Connectors
+open Readder.Core.Connectors
 open Lit
-open Readder.Screens.Home.Components.CommonTypes.CommunitySelector
+open Readder.UI.Screens.Home.Components.CommonTypes.CommunitySelector
 
 let private suggestionItemView dispatch selectedIndex communityIndex community =
     let classes =

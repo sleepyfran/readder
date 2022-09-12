@@ -1,9 +1,9 @@
-module Readder.Screens.Home.Components.CommunitySelector
+module Readder.UI.Screens.Home.Components.CommunitySelector
 
 open Browser.Types
-open Core.Connectors
-open Core.Math
-open Readder.Screens.Home.Components.CommonTypes.CommunitySelector
+open Readder.Core.Connectors
+open Readder.Core.Math
+open Readder.UI.Screens.Home.Components.CommonTypes.CommunitySelector
 open Elmish
 open Lit
 

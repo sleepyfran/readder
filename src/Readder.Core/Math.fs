@@ -1,4 +1,4 @@
-module Core.Math
+module Readder.Core.Math
 
 /// Returns a clamped value between the inclusive range of min and max.
 let clamp (min: int<_>) (max: int<_>) (value: int<_>) =
