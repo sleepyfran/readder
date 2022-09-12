@@ -43,6 +43,14 @@ let render state dispatch =
         state.CommunityChoiceState.SelectedCommunity.IsNone
         || state.CommunityChoiceState.Input = ""
 
+    let showMeButtonText =
+        if state.CommunityChoiceState.SelectedCommunity.IsNone then
+            "Choose a community"
+        else if state.CommunityChoiceState.Input = "" then
+            "Enter a subcommunity"
+        else
+            "Show me!"
+
     html
         $"""
         <div class="flex flex-col m-10 sm:m-0 sm:items-center">
@@ -63,7 +71,7 @@ let render state dispatch =
             </div>
 
             <button ?disabled={disableShowMeButton} class="mt-5 px-6 h-12 font-semibold border-2 border-black dark:border-white rounded-md bg-teal-400 hover:bg-teal-500 active:bg-teal-200 disabled:text-gray-200 disabled:bg-gray-400 text-black">
-                Show me!
+                {showMeButtonText}
             </button>
         </div>
         """
