@@ -51,7 +51,10 @@ let update state cmd =
             state.Input = "" && state.SelectedCommunity.IsSome
 
         if canRemoveCommunity then
-            { state with SelectedCommunity = None }, Cmd.none
+            { state with
+                SelectedCommunity = None
+                SuggestionsSelectedIndex = 0 },
+            Cmd.none
         else
             state, Command.OnInput input |> Cmd.ofMsg
     | Command.OnHover index ->
@@ -104,7 +107,7 @@ let view state dispatch =
 
     html
         $"""
-        <div>
+        <div class="relative">
             <div class="w-full border-b-2 border-slate-900 dark:border-white text-2xl">
                 {SelectedCommunity.view state}
                 <input

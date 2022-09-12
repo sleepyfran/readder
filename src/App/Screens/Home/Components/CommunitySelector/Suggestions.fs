@@ -33,7 +33,7 @@ let view state dispatch =
     else
         html
             $"""
-            <div class="flex flex-col items-start bg-slate-400 rounded-xl p-4 mt-1 dark:bg-slate-800" role="menu">
+            <div class="absolute bg-slate-400 rounded-xl p-4 mt-1 dark:bg-slate-800 w-full" role="menu">
                 <p class="text-gray-200">Suggestions:</p>
                 {state.Suggestions
                  |> List.mapi (fun index community ->
