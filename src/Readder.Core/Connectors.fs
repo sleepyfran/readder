@@ -1,6 +1,8 @@
 module Readder.Core.Connectors
 
 open Readder.Core.Types
+open Readder.Core.Apis
+open Readder.Core.ReadingTime
 
 /// Returns the name of the given community.
 let nameOf community =
@@ -25,3 +27,31 @@ let suggestionsFor (query: string) =
 
             (nameOf community).Contains(lowercaseQuery)
             || (keywordOf community).Contains(lowercaseQuery))
+
+/// Retrieves the posts that match the given options.
+let fetchPosts (options: Options) =
+    let apiRequest =
+        match options.Community with
+        | Reddit -> Reddit.fetchPosts options.Subcommunity
+        | DevTo ->
+            (* TODO: Implement. *)
+            async { return Error RequestError.NotReachable }
+
+    async {
+        let! postsResult = apiRequest
+
+        return
+            match postsResult with
+            | Ok posts ->
+                let possiblePosts =
+                    posts
+                    |> List.filter (fun post ->
+                        post.Content <> ""
+                        && minutesToRead post <= options.AvailableMinutes)
+
+                if List.isEmpty possiblePosts then
+                    Error PostLoadError.NoResults
+                else
+                    Ok possiblePosts
+            | Error err -> PostLoadError.RequestError err |> Error
+    }
