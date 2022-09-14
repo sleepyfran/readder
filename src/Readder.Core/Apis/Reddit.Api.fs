@@ -1,7 +1,6 @@
 module Readder.Core.Apis.Reddit
 
 open Fable.SimpleHttp
-open FSharp.Data
 open Readder.Core.Types
 
 module Endpoints =
@@ -14,25 +13,25 @@ module Endpoints =
 
 [<Literal>]
 let private REDDIT_API_SAMPLE =
-    "https://reddit.com/r/nosleep/hot/.json?limit=10"
+    "https://reddit.com/r/nosleep/hot/.json?limit=5"
 
-type private ApiResponse = JsonProvider<REDDIT_API_SAMPLE, RootName="project">
+type private ApiResponse = Fable.JsonProvider.Generator<REDDIT_API_SAMPLE>
 
 let private parsePosts subreddit response =
-    let parsedResponse = ApiResponse.Parse response
+    let parsedResponse = ApiResponse(response)
 
-    match parsedResponse.Data with
-    | data when Array.isEmpty data.Children -> Error RequestError.EmptyResponse
+    match parsedResponse.data with
+    | data when Array.isEmpty data.children -> Error RequestError.EmptyResponse
     | data ->
-        data.Children
+        data.children
         |> Array.map (fun child ->
-            let post = child.Data
+            let post = child.data
 
-            { Title = post.Title
+            { Title = post.title
               Community = Reddit
-              Content = post.Selftext |> Option.defaultValue ""
-              Html = post.SelftextHtml |> Option.defaultValue ""
-              Url = post.Url
+              Content = post.selftext
+              Html = post.selftext_html :?> string
+              Url = post.url
               CommunityUrl = Endpoints.subredditUrl subreddit })
         |> List.ofArray
         |> Ok
