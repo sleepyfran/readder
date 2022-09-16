@@ -3,8 +3,8 @@ module Readder.UI.Screens.Home
 
 open Elmish
 open Lit
-open Readder.UI.Screens.Home.Components
-open Readder.UI.Screens.Home.Components.CommonTypes
+open Readder.UI.Screens.HomeComponents
+open Readder.UI.Screens.HomeComponents.CommonTypes
 open Readder.Core.Connectors
 open Readder.Core.Types
 

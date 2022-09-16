@@ -1,4 +1,4 @@
-module Readder.UI.Screens.Home.Components.CommonTypes
+module Readder.UI.Screens.HomeComponents.CommonTypes
 
 open Readder.Core.Types
 

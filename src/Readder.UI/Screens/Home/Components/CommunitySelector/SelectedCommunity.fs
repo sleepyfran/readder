@@ -1,9 +1,9 @@
 [<RequireQualifiedAccess>]
-module Readder.UI.Screens.Home.Components.SelectedCommunity
+module Readder.UI.Screens.HomeComponents.SelectedCommunity
 
 open Readder.Core.Connectors
 open Lit
-open Readder.UI.Screens.Home.Components.CommonTypes.CommunitySelector
+open Readder.UI.Screens.HomeComponents.CommonTypes.CommunitySelector
 
 /// Renders a block with the keyword of the currently selected community, if any.
 let view state =
