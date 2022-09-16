@@ -13,7 +13,7 @@ module Endpoints =
 
 [<Literal>]
 let private REDDIT_API_SAMPLE =
-    "https://reddit.com/r/nosleep/hot/.json?limit=5"
+    "https://reddit.com/r/nosleep/hot/.json?limit=1"
 
 type private ApiResponse = Fable.JsonProvider.Generator<REDDIT_API_SAMPLE>
 

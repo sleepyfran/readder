@@ -72,7 +72,7 @@ let update state cmd =
 
         { state with UiState = UiState.Loading }, Cmd.ofSub dispatchLoadedPosts
     | Command.PostsLoaded _ ->
-        (* TODO: Show readder screen. *)
+        (* This command will be intercepted by the app to navigate to the reader screen. *)
         { state with UiState = UiState.Initial }, Cmd.none
     | Command.PostsErrored error ->
         { state with UiState = UiState.Errored error }, Cmd.none

@@ -10,7 +10,8 @@ type AppState =
       CurrentScreen: Screen
 
       (* Screen states. *)
-      HomeState: Home.State }
+      HomeState: Home.State
+      ReaderState: Reader.State }
 
 /// Defines all available commands in the whole app, namespaced by the
 /// originating screen.

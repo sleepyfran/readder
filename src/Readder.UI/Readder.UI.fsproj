@@ -4,6 +4,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Screens/Reader/Reader.fs" />
     <Compile Include="Screens/Home/Components/CommunitySelector/CommunitySelector.Types.fs" />
     <Compile Include="Screens/Home/Components/CommunitySelector/SelectedCommunity.fs" />
     <Compile Include="Screens/Home/Components/CommunitySelector/Suggestions.fs" />
