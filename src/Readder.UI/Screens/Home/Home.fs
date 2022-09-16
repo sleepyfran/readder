@@ -41,23 +41,42 @@ let private optionsFromState state =
           |> Option.get
       Subcommunity = state.CommunityChoiceState.Input }
 
+let private canShowPosts state =
+    state.CommunityChoiceState.SelectedCommunity.IsSome
+    && state.CommunityChoiceState.Input <> ""
+    && state.UiState <> UiState.Loading
+
+let private processCommunityChoiceCommand state cmd =
+    let nextState, nextCmd =
+        CommunitySelector.update state.CommunityChoiceState cmd
+
+    let selectorState =
+        { state with CommunityChoiceState = nextState }
+
+    let selectorCmd =
+        Cmd.map Command.CommunityChoiceCommand nextCmd
+
+    selectorState, selectorCmd
+
 let update state cmd =
     match cmd with
     | Command.ChangeSelectedMinutes mins ->
         match System.Int32.TryParse mins with
         | true, mins -> { state with SelectedMinutes = mins }, Cmd.none
         | _ -> state, Cmd.none
+    | Command.CommunityChoiceCommand CommunitySelector.Command.OnEnter ->
+        (*
+            Presses on enter when a community and subcommunity are already
+            selected means we should load the posts!
+        *)
+        if state |> canShowPosts then
+            state, Command.LoadPosts |> Cmd.ofMsg
+        else
+            processCommunityChoiceCommand
+                state
+                CommunitySelector.Command.OnEnter
     | Command.CommunityChoiceCommand cmd ->
-        let nextState, nextCmd =
-            CommunitySelector.update state.CommunityChoiceState cmd
-
-        let selectorState =
-            { state with CommunityChoiceState = nextState }
-
-        let selectorCmd =
-            Cmd.map Command.CommunityChoiceCommand nextCmd
-
-        selectorState, selectorCmd
+        processCommunityChoiceCommand state cmd
     | Command.LoadPosts ->
         let dispatchLoadedPosts dispatch =
             async {
@@ -94,10 +113,7 @@ let private errorView state =
     | _ -> Lit.nothing
 
 let render state dispatch =
-    let disableShowMeButton =
-        state.CommunityChoiceState.SelectedCommunity.IsNone
-        || state.CommunityChoiceState.Input = ""
-        || state.UiState = UiState.Loading
+    let disableShowMeButton = state |> canShowPosts |> not
 
     let showMeButtonText =
         if state.CommunityChoiceState.SelectedCommunity.IsNone then
