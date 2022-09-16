@@ -24,6 +24,11 @@ let render state dispatch =
         $"""
         <div class="flex flex-col mx-5 lg:mx-32 xl:mx-49 2xl:mx-96 mb-10">
             <h1 class="text-2xl font-bold">{post.Title}</h1>
+            <div class="flex gap-x-5">
+                <a target="_blank" href={post.Url}>Open post</a>
+                <a target="_blank" href={post.CommunityUrl}>Open community</a>
+            </div>
+
             <p class="mt-10">{postContent}</p>
         </div>
         """

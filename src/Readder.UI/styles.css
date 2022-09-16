@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    a:not(#header) {
+        @apply text-cyan-500;
+    }
+
+    a:hover:not(#header) {
+        @apply text-cyan-700;
+    }
+}
