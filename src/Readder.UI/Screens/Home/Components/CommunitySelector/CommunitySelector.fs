@@ -95,17 +95,6 @@ let view state dispatch =
         | "Backspace" -> Command.OnBackspace ev.target.Value |> dispatch
         | _ -> Command.OnInput ev.target.Value |> dispatch
 
-    let inputRef = Hook.useRef<HTMLInputElement> ()
-
-    (*
-        FIXME: For some reason setting the `value` property on the input element
-        was not enough to update the input content based on the state's property,
-        so in here we update it manually on the ref. I might revisit this later (hah).
-    *)
-    match inputRef.Value with
-    | Some input -> input.value <- state.Input
-    | None -> ()
-
     html
         $"""
         <div class="relative">
@@ -117,7 +106,7 @@ let view state dispatch =
                     autocorrect="off"
                     autocomplete="off"
                     placeholder={placeholder}
-                    {Lit.refValue inputRef}
+                    .value={state.Input}
                     @keyup={Ev onKeyUp} />
             </div>
 
