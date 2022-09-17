@@ -13,8 +13,13 @@ module Endpoints =
 
 [<Literal>]
 let private REDDIT_API_SAMPLE =
-    "https://reddit.com/r/nosleep/hot/.json?limit=1"
+    "https://reddit.com/r/WritingPrompts/hot/.json?limit=1"
 
+(*
+    Some subreddits and high limits can cause stack overflows. If you come across
+    this problem change the above sample URL to some other subreddit, usually
+    that makes it work.
+*)
 type private ApiResponse = Fable.JsonProvider.Generator<REDDIT_API_SAMPLE>
 
 let private parsePosts subreddit response =
@@ -30,7 +35,7 @@ let private parsePosts subreddit response =
             { Title = post.title
               Community = Reddit
               Content = post.selftext
-              Html = post.selftext_html :?> string
+              Html = post.selftext_html
               Url = post.url
               CommunityUrl = Endpoints.subredditUrl subreddit })
         |> List.ofArray

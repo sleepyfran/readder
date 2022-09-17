@@ -3,13 +3,14 @@ module Readder.UI.Screens.HomeComponents.CommunitySelector
 open Browser.Types
 open Readder.Core.Connectors
 open Readder.Core.Math
+open Readder.Core.Types
 open Readder.UI.Screens.HomeComponents.CommonTypes.CommunitySelector
 open Elmish
 open Lit
 
 let init =
     { Input = ""
-      SelectedCommunity = None
+      SelectedCommunity = Some Reddit
       SuggestionsSelectedIndex = 0
       Suggestions = [] }
 

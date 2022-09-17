@@ -1,12 +1,10 @@
 module Readder.Core.Types
 
 /// Defines all available communities that we support.
-type Community =
-    | Reddit
-    | DevTo
+type Community = | Reddit
 
 /// Defines all communities available.
-let communities = [ Reddit; DevTo ]
+let communities = [ Reddit ]
 
 /// Options that are asked to the user to customize the reading experience.
 type Options =

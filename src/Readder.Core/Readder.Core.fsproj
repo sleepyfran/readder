@@ -9,7 +9,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Types.fs" />
-    <Compile Include="Apis/DevTo.Api.fs" />
     <Compile Include="Apis/Reddit.Api.fs" />
     <Compile Include="Math.fs" />
     <Compile Include="ReadingTime.fs" />

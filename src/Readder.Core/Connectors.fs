@@ -8,13 +8,11 @@ open Readder.Core.ReadingTime
 let nameOf community =
     match community with
     | Reddit -> "reddit"
-    | DevTo -> "dev.to"
 
 /// Returns the keyword associated with a given community.
 let keywordOf community =
     match community with
     | Reddit -> "r/"
-    | DevTo -> "dev#"
 
 /// Retrieves all matching communities given either a name or a keyword.
 let suggestionsFor (query: string) =
@@ -33,9 +31,6 @@ let fetchPosts (options: Options) =
     let apiRequest =
         match options.Community with
         | Reddit -> Reddit.fetchPosts options.Subcommunity
-        | DevTo ->
-            (* TODO: Implement. *)
-            async { return Error RequestError.NotReachable }
 
     async {
         let! postsResult = apiRequest
