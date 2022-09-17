@@ -25,12 +25,20 @@ let update cmd state =
         let appState = { state with HomeState = homeState }
         let appCmd = Cmd.map HomeCommand homeCmd
         appState, appCmd
+    | ReaderCommand readerCmd ->
+        let readerState, readerCmd =
+            Reader.update state.ReaderState readerCmd
+
+        let appState = { state with ReaderState = readerState }
+        let appCmd = Cmd.map ReaderCommand readerCmd
+        appState, appCmd
 
 let view state dispatch =
     let mainView =
         match state.CurrentScreen with
         | Screen.Home -> Home.render state.HomeState (HomeCommand >> dispatch)
-        | Screen.Reader _ -> Reader.render state.ReaderState dispatch
+        | Screen.Reader _ ->
+            Reader.render state.ReaderState (ReaderCommand >> dispatch)
 
     html
         $"""

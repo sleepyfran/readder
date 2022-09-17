@@ -3,6 +3,7 @@ module Readder.UI.Screens.Home
 
 open Elmish
 open Lit
+open Readder.UI.Screens.Components
 open Readder.UI.Screens.HomeComponents
 open Readder.UI.Screens.HomeComponents.CommonTypes
 open Readder.Core.Connectors
@@ -138,18 +139,16 @@ let render state dispatch =
                     @input={EvVal(Command.ChangeSelectedMinutes >> dispatch)} />
                 minutes to read from
             </p>
-            <div class="mt-5 w-60 sm:w-96">
+            <div class="my-5 w-60 sm:w-96">
                 {CommunitySelector.view
                      state.CommunityChoiceState
                      (Command.CommunityChoiceCommand >> dispatch)}
             </div>
 
-            <button
-                ?disabled={disableShowMeButton}
-                class="mt-5 px-6 h-12 font-semibold border-2 border-black dark:border-white rounded-md bg-teal-400 hover:bg-teal-500 active:bg-teal-200 disabled:text-gray-200 disabled:bg-gray-400 text-black"
-                @click={Ev(fun _ -> dispatch Command.LoadPosts)}>
-                {showMeButtonText}
-            </button>
+            {Button.view'
+                 showMeButtonText
+                 (fun _ -> dispatch Command.LoadPosts)
+                 disableShowMeButton}
 
             <div class="mt-10">
                 {errorView state}

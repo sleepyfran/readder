@@ -15,4 +15,6 @@ type AppState =
 
 /// Defines all available commands in the whole app, namespaced by the
 /// originating screen.
-type AppCommand = HomeCommand of Home.Command
+type AppCommand =
+    | HomeCommand of Home.Command
+    | ReaderCommand of Reader.Command
