@@ -63,7 +63,7 @@ let update state cmd =
             { state with
                 SelectedCommunity = None
                 SuggestionsSelectedIndex = 0 },
-            Cmd.none
+            Command.OnInput "" |> Cmd.ofMsg
         else
             state, Command.OnInput input |> Cmd.ofMsg
     | Command.OnHover index ->
