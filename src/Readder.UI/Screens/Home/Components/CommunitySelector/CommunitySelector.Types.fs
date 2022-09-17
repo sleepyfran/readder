@@ -17,6 +17,8 @@ module CommunitySelector =
     [<RequireQualifiedAccess>]
     type Command =
         | OnInput of input: string
+        | OnInputFocused
+        | OnInputLeft
         | OnArrowUp
         | OnArrowDown
         | OnEnter

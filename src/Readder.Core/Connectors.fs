@@ -17,7 +17,7 @@ let keywordOf community =
 /// Retrieves all matching communities given either a name or a keyword.
 let suggestionsFor (query: string) =
     if query = "" then
-        []
+        communities
     else
         communities
         |> List.filter (fun community ->

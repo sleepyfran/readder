@@ -14,18 +14,26 @@ let init =
       SuggestionsSelectedIndex = 0
       Suggestions = [] }
 
+let removeSuggestions state =
+    { state with
+        SuggestionsSelectedIndex = 0
+        Suggestions = [] }
+
+let showSuggestions state input =
+    match state.SelectedCommunity with
+    | None ->
+        suggestionsFor input
+        |> Command.SuggestionsChanged
+        |> Cmd.ofMsg
+    | _ -> Cmd.none
+
 let update state cmd =
     match cmd with
     | Command.OnInput input ->
-        let suggestionCmd =
-            match state.SelectedCommunity with
-            | None ->
-                suggestionsFor input
-                |> Command.SuggestionsChanged
-                |> Cmd.ofMsg
-            | _ -> Cmd.none
-
+        let suggestionCmd = showSuggestions state input
         { state with Input = input }, suggestionCmd
+    | Command.OnInputFocused -> state, showSuggestions state state.Input
+    | Command.OnInputLeft -> removeSuggestions state, Cmd.none
     | Command.OnArrowUp ->
         let selectedIndex =
             state.SuggestionsSelectedIndex - 1
@@ -71,10 +79,7 @@ let update state cmd =
     | Command.SuggestionSelected suggestion ->
         let clearInputCmd = Command.OnInput ""
 
-        { state with
-            SelectedCommunity = Some suggestion
-            SuggestionsSelectedIndex = 0
-            Suggestions = [] },
+        { removeSuggestions state with SelectedCommunity = Some suggestion },
         Cmd.ofMsg clearInputCmd
 
 [<HookComponent>]
@@ -107,6 +112,8 @@ let view state dispatch =
                     autocomplete="off"
                     placeholder={placeholder}
                     .value={state.Input}
+                    @focus={Ev(fun _ -> Command.OnInputFocused |> dispatch)}
+                    @blur={Ev(fun _ -> Command.OnInputLeft |> dispatch)}
                     @keyup={Ev onKeyUp} />
             </div>
 
