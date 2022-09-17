@@ -7,7 +7,7 @@
     "css": "tailwindcss -i ./src/styles.css -o ./dist/styles.css",
     "format": "dotnet fantomas . --recurse",
     "start": "dotnet fable watch src/Readder.UI --run vite",
-    "build": "dotnet fable src/Readder.UI --run vite build"
+    "build": "dotnet fable src/Readder.UI --run vite build --base=/readder/"
   },
   "dependencies": {
     "lit": "2.0.0",
